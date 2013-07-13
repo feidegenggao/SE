@@ -11,3 +11,10 @@
 *.lai
 *.la
 *.a
+
+# Exe files
+*.out
+
+# Temp files
+*.raw
+*.index
