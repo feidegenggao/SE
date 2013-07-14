@@ -15,19 +15,22 @@
  *
  * ============================================================================
  */
+#include    "page.h"
 #include    "types.h"
+
+#include    "base/types.h"
+#include    "base/log.h"
+#include    <assert.h>
+#include    <fstream>
+#include    <iostream>
+#include    <string>
+using namespace std;
 using namespace base;
-#include    "log.h"
-using namespace base::log;
 
 const int g_k_n_search_deepth = 5;
-const string g_k_s_sites_seeds_file_name = "./sites.seeds";
-
-typedef set<string> UrlSet;
-typedef UrlSet::iterator UrlSetIt;
 
 void GetSiteSeed(UrlSet &sites_seeds, const string &file_name);
-int visit_url(const string &url, const UrlSet &visited_sites, UrlSet &unvisited_sites);
+int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sites);
 
 int main(int argc, char *argv[])
 {
@@ -38,7 +41,7 @@ int main(int argc, char *argv[])
     }
 
     UrlSet sites_seeds;
-    GetSiteSeed(sites_seeds, g_k_s_sites_seeds_file_name);
+    GetSiteSeed(sites_seeds, string("sites.seeds"));
 
     UrlSet unvisited_sites;
     UrlSet visited_sites;
@@ -47,8 +50,7 @@ int main(int argc, char *argv[])
     while(cur_deepth > 0)
     {
         UrlSetIt seeds_start = sites_seeds.begin();
-        const UrlSetIt seeds_end = sites_seeds.end();
-        while (seeds_start != seeds_end)
+        while (seeds_start != sites_seeds.end())
         {
             if (SUCCESSFUL == visit_url(*seeds_start, visited_sites, unvisited_sites))
             {
@@ -57,12 +59,54 @@ int main(int argc, char *argv[])
             seeds_start++;
         }
 
-        //unvisited_sites --> sites_seeds
+        //unvisited_sites -->> sites_seeds
         sites_seeds = unvisited_sites;
         unvisited_sites.clear();
 
         cur_deepth--;
     }
 
+    cerr << "\n" << endl;
+    return SUCCESSFUL;
+}
+
+
+void GetSiteSeed(UrlSet &sites_seeds, const string &file_name)
+{
+    ifstream seeds_stream;
+    seeds_stream.open(file_name.c_str());
+    
+    assert(seeds_stream);
+
+    string url_temp;
+    while (seeds_stream >> url_temp)
+    {
+        Url url(url_temp);
+        sites_seeds.insert(url);
+    }
+
+    for (UrlSetIt it = sites_seeds.begin(); it != sites_seeds.end(); it++)
+        cout << "*it:" << *it << endl;
+}
+
+//return:
+//FAILED: we visited the url and so return FAILED;
+//SUCCESSFUL: we not visited the url ever , and we try to visit the url
+//but not guarantee get data from the url
+int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sites)
+{
+    if (visited_sites.find(url) != visited_sites.end())
+    {
+        return FAILED;
+    }
+
+    Page cur_page(url);
+    //get data from the url
+    cur_page.VisitUrl();
+    //analysis the hyperlink from the data that get from the url
+    //and then insert into unvisited_sites
+    //if no data ( we can't connect to the url) we will insert nothing into
+    //unvisited_sites
+    cur_page.GetUnvisitedUrl(unvisited_sites);
     return SUCCESSFUL;
 }
