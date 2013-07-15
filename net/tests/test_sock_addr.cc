@@ -42,7 +42,7 @@ int main()
     LOG_INFO << "second_socket_addr's ip:" << second_socket_addr.IPStr();
     LOG_INFO << "second_socket_addr's port:" << second_socket_addr.PortStr();
 
-    SockAddr third_socket_addr(second_socket_addr.StructSockaddrIn());
+    SockAddr third_socket_addr(second_socket_addr.GetStructSockaddrIn());
     LOG_INFO << "third_socket_addr's ip:" << third_socket_addr.IPStr();
     LOG_INFO << "third_socket_addr's port:" << third_socket_addr.PortStr();
 

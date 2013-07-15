@@ -17,6 +17,9 @@
  */
 #ifndef     URL_HEADER
 #define     URL_HEADER
+#include    "dns.h"
+#include    "net/sock_addr.h"
+
 #include    <iostream>
 using std::ostream;
 #include    <string>
@@ -33,16 +36,19 @@ class Url
     public:
         explicit Url(string url);
         string Str() const { return str_url_;}
-        void Resolution();
+        bool IfVAild() const { return if_vaild_;}
 
     private:
         string str_url_;
         void Analysis();
+        void Resolved();
+
         UrlScheme url_scheme_;
-
-
-        string host_;
-        string port_;
+        string node_;
+        string services_;
+        bool if_vaild_;
+        //the first sockaddr in AddrSet
+        SockAddr sockaddr_;
 };
 
 inline bool operator == (const Url &left, const Url &right)

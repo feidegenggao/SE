@@ -1,3 +1,8 @@
-PROJECT_ROOT_DIR = /root/lxf/se
+PROJECT_ROOT_DIR=/root/lxf/se
+BASE_DIR=$(PROJECT_ROOT_DIR)/base
+NET_DIR=$(PROJECT_ROOT_DIR)/net
+
+COMPILE_OPTION= -g -Wall -Werror -lpthread  
+
 all:
-	g++ main.cc url.cc page.cc $(PROJECT_ROOT_DIR)/base/time_stamp.cc -g -o crawl.out -I $(PROJECT_ROOT_DIR)
+	g++ main.cc url.cc page.cc dns.cc $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc -I $(PROJECT_ROOT_DIR) $(COMPILE_OPTION) -o crawl.out 

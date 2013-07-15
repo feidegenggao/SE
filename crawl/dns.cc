@@ -29,12 +29,12 @@ using namespace base;
 #include    <string>
 using std::string;
 
-void DNS::ResolveNodeService(string node, string service, AddrInfo &addrinfo)
+void DNS::ResolveNodeService(string node, string service, AddrSet &addrinfo)
 {
     struct addrinfo *dst_addrinfo = NULL;
     ResolutionHostName(&dst_addrinfo, node, service);
 
-    addrinfo.SetAddrInfoPointer(dst_addrinfo);
+    addrinfo.SetAddrSetPointer(dst_addrinfo);
 }
 
 void DNS::ResolutionHostName(struct addrinfo **dst_addrinfo, string node, string service)
@@ -53,29 +53,32 @@ void DNS::ResolutionHostName(struct addrinfo **dst_addrinfo, string node, string
     }
 }
 
-AddrInfo::AddrInfo():addrinfo_(NULL),current_pointer_to_addrinfo_(NULL)
+AddrSet::AddrSet():addrinfo_(NULL),current_pointer_to_addrinfo_(NULL)
 {
 
 }
 
-AddrInfo::~AddrInfo()
+AddrSet::~AddrSet()
 {
     freeaddrinfo(addrinfo_);
 }
 
-int AddrInfo::GetAddrInfo(struct sockaddr_in &temp)
+int AddrSet::GetSockAddr(SockAddr &temp)
 {
-    memset(&temp, 0, sizeof(struct sockaddr_in));
     if (current_pointer_to_addrinfo_ != NULL)
     {
-        memcpy(&temp, current_pointer_to_addrinfo_->ai_addr, current_pointer_to_addrinfo_->ai_addrlen);
+        struct sockaddr_in temp_sockaddr_in;
+        memset(&temp_sockaddr_in, 0, sizeof(struct sockaddr_in));
+        memcpy(&temp_sockaddr_in, current_pointer_to_addrinfo_->ai_addr, current_pointer_to_addrinfo_->ai_addrlen);
+
+        temp.SetStructSockAddrIn(temp_sockaddr_in);
         current_pointer_to_addrinfo_ = current_pointer_to_addrinfo_->ai_next;
         return SUCCESSFUL;
     }
     return FAILED;
 }
 
-void AddrInfo::SetAddrInfoPointer(struct addrinfo *addrinfo_rt)
+void AddrSet::SetAddrSetPointer(struct addrinfo *addrinfo_rt)
 { 
     addrinfo_ = addrinfo_rt; 
     current_pointer_to_addrinfo_ = addrinfo_;

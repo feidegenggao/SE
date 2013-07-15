@@ -1,12 +1,12 @@
 /*
  * ============================================================================
  *
- *       Filename:  page.cc
+ *       Filename:  test_url.cc
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  07/13/13 20:02:32
+ *        Created:  07/15/13 16:37:41
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,21 +15,11 @@
  *
  * ============================================================================
  */
-#include    "page.h"
-#include    "base/log.h"
-using namespace base;
+#include    "crawl/url.h"
 
-Page::Page(const Url &url):url_(url)
+int main()
 {
+    Url url_edu("http://www.uestc.edu.cn");
 
-}
-
-void Page::VisitUrl()
-{
-    LOG_DEBUG << "visit url";
-}
-
-void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
-{
-    LOG_DEBUG << "get unvisited url";
+    return 0;
 }

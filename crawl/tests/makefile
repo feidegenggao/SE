@@ -1,9 +1,18 @@
 PROJECT_ROOT_DIR=/root/lxf/se
-BASE_COMPLIE_FILES=$(PROJECT_ROOT_DIR)/base/time_stamp.cc
+BASE_DIR=$(PROJECT_ROOT_DIR)/base
+NET_DIR=$(PROJECT_ROOT_DIR)/net
+CRAWL_DIR=$(PROJECT_ROOT_DIR)/crawl
+
 COMPLIE_OPTION= -lpthread -Wall -Werror
 
 dns:
-	g++ $(PROJECT_ROOT_DIR)/crawl/dns.cc test_dns.cc $(BASE_COMPLIE_FILES) -g -o test_dns.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION)
+	g++ $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/dns.cc test_dns.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_dns.out 
+
+url:
+	g++ $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/url.cc $(CRAWL_DIR)/dns.cc test_url.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_url.out
+
+page:
+	g++ $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/dns.cc $(CRAWL_DIR)/page.cc $(CRAWL_DIR)/url.cc test_page.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_page.out
 
 clean:
 	rm *.out

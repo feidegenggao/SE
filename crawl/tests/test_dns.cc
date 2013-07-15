@@ -52,16 +52,24 @@ void PrintAddrInfo(struct addrinfo *result)
     LOG_DEBUG << "result's port:" << ntohs(addr_struct.sin_port);
 }
 
+void PrintAddrInfo(SockAddr result)
+{
+    LOG_DEBUG << "result's ip:" << result.IPStr();
+    LOG_DEBUG << "result's port:" << result.PortStr();
+}
+
 int main()
 {
     LOG_DEBUG << "Start...";
-    AddrInfo temp_addr_info;
-    DNS::GetInstance()->ResolveNodeService("www.uestc.edu.cn", "http", temp_addr_info);
+    AddrSet temp_addr_set;
+    //DNS::GetInstance()->ResolveNodeService("www.uestc.edu.cn", "http", temp_addr_set);
+    DNS::GetInstance()->ResolveNodeService("www.jwc.uestc.edu.cn", "http", temp_addr_set);
+    //DNS::GetInstance()->ResolveNodeService("222.197.183.103", "http", temp_addr_set);
 
-    struct sockaddr_in result;
+    SockAddr result;
     do
     {
-        int rt = temp_addr_info.GetAddrInfo(result);
+        int rt = temp_addr_set.GetSockAddr(result);
         if (rt == SUCCESSFUL)
             PrintAddrInfo(result);
         else

@@ -26,12 +26,14 @@ namespace net
     class SockAddr
     {
         public:
+            SockAddr();
             explicit SockAddr(struct sockaddr_in sockaddr);
             SockAddr(string ipaddr, string port);
 
             string IPStr() const { return ipaddr_;}
             string PortStr() const { return port_;}
-            struct sockaddr_in StructSockaddrIn() const { return sockaddr_in_;}
+            struct sockaddr_in GetStructSockaddrIn() const { return sockaddr_in_;}
+            void SetStructSockAddrIn(struct sockaddr_in sockaddr) { sockaddr_in_ = sockaddr;ConvertSockAddrToString();}
 
         private:
             void init();

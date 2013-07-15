@@ -29,6 +29,11 @@ using std::stringstream;
 
 #include    <stdlib.h>
 
+SockAddr::SockAddr()
+{
+
+}
+
 SockAddr::SockAddr(struct sockaddr_in sock_addr)
 {
     init();
