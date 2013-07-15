@@ -18,11 +18,22 @@
 #include    "url.h"
 
 #include    "base/log.h"
+#include    "base/regex.h"
+
 using namespace base;
+
+Url::Url(string url):str_url_(url), url_scheme_(SCHEME_INVALID)
+{
+    Analysis();
+}
 
 void Url::Analysis()
 {
-    //get url_scheme_
+    string src_regex("http://.*");
+    if (Regex::GetInstance()->IfMatch(src_regex, str_url_))
+    {
+        url_scheme_ = SCHEME_HTTP;
+    }
 }
 
 void Url::Resolution()

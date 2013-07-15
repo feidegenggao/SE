@@ -54,6 +54,7 @@ void PrintAddrInfo(struct addrinfo *result)
 
 int main()
 {
+    LOG_DEBUG << "Start...";
     AddrInfo temp_addr_info;
     DNS::GetInstance()->ResolveNodeService("www.uestc.edu.cn", "http", temp_addr_info);
 

@@ -31,7 +31,7 @@ enum UrlScheme
 class Url
 {
     public:
-        explicit Url(string url):str_url_(url){Analysis();}
+        explicit Url(string url);
         string Str() const { return str_url_;}
         void Resolution();
 

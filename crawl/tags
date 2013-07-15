@@ -4,28 +4,45 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AddrInfo	dns.cc	/^AddrInfo::AddrInfo():addrinfo_(NULL),current_pointer_to_addrinfo_(NULL)$/;"	f	class:AddrInfo
+AddrInfo	dns.h	/^class AddrInfo$/;"	c
+Analysis	url.cc	/^void Url::Analysis()$/;"	f	class:Url
+BASE_COMPLIE_FILES	tests/makefile	/^BASE_COMPLIE_FILES=$(PROJECT_ROOT_DIR)\/base\/time_stamp.cc$/;"	m
+COMPLIE_OPTION	tests/makefile	/^COMPLIE_OPTION= -lpthread -Wall -Werror$/;"	m
+DNS	dns.h	/^class DNS : public Singleton<DNS>$/;"	c
+DNS_HEADER	dns.h	19;"	d
+GetAddrInfo	dns.cc	/^int AddrInfo::GetAddrInfo(struct sockaddr_in &temp)$/;"	f	class:AddrInfo
 GetSiteSeed	main.cc	/^void GetSiteSeed(UrlSet &sites_seeds, const string &file_name)$/;"	f
 GetUnvisitedUrl	page.cc	/^void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)$/;"	f	class:Page
 PAGE_HEADER	page.h	19;"	d
 PROJECT_ROOT_DIR	makefile	/^PROJECT_ROOT_DIR = \/root\/lxf\/se$/;"	m
+PROJECT_ROOT_DIR	tests/makefile	/^PROJECT_ROOT_DIR=\/root\/lxf\/se$/;"	m
 Page	page.cc	/^Page::Page(const Url &url):url_(url)$/;"	f	class:Page
 Page	page.h	/^class Page$/;"	c
+PrintAddrInfo	tests/test_dns.cc	/^void PrintAddrInfo(struct addrinfo *result)$/;"	f
+PrintAddrInfo	tests/test_dns.cc	/^void PrintAddrInfo(struct sockaddr_in addr_struct)$/;"	f
 Resolution	url.cc	/^void Url::Resolution()$/;"	f	class:Url
+ResolutionHostName	dns.cc	/^void DNS::ResolutionHostName(struct addrinfo **dst_addrinfo, string node, string service)$/;"	f	class:DNS
+ResolveNodeService	dns.cc	/^void DNS::ResolveNodeService(string node, string service, AddrInfo &addrinfo)$/;"	f	class:DNS
 SCHEME_HTTP	url.h	/^    SCHEME_HTTP,$/;"	e	enum:UrlScheme
 SCHEME_INVALID	url.h	/^    SCHEME_INVALID$/;"	e	enum:UrlScheme
+SetAddrInfoPointer	dns.cc	/^void AddrInfo::SetAddrInfoPointer(struct addrinfo *addrinfo_rt)$/;"	f	class:AddrInfo
 Str	url.h	/^        string Str() const { return str_url_;}$/;"	f	class:Url
 TYPES_HEADER	types.h	19;"	d
 URL_HEADER	url.h	19;"	d
-Url	url.h	/^        explicit Url(string url):str_url_(url){}$/;"	f	class:Url
+Url	url.cc	/^Url::Url(string url):str_url_(url), url_scheme_(SCHEME_INVALID)$/;"	f	class:Url
 Url	url.h	/^class Url$/;"	c
 UrlScheme	url.h	/^enum UrlScheme$/;"	g
 UrlSet	types.h	/^typedef set<Url> UrlSet;$/;"	t
 UrlSetIt	types.h	/^typedef UrlSet::iterator UrlSetIt;$/;"	t
 VisitUrl	page.cc	/^void Page::VisitUrl()$/;"	f	class:Page
+addrinfo_	dns.h	/^        struct addrinfo *addrinfo_;$/;"	m	class:AddrInfo	typeref:struct:AddrInfo::addrinfo
+current_pointer_to_addrinfo_	dns.h	/^        struct addrinfo *current_pointer_to_addrinfo_;$/;"	m	class:AddrInfo	typeref:struct:AddrInfo::addrinfo
 g_k_n_search_deepth	main.cc	/^const int g_k_n_search_deepth = 5;$/;"	v
-host_name_	url.h	/^        string host_name_;$/;"	m	class:Url
-ipaddr_	url.h	/^        string ipaddr_;$/;"	m	class:Url
+host_	url.h	/^        string host_;$/;"	m	class:Url
 main	main.cc	/^int main(int argc, char *argv[])$/;"	f
+main	tests/test_dns.cc	/^int main()$/;"	f
+main	tests/test_getaddrinfo.cc	/^int main()$/;"	f
 operator <	url.h	/^inline bool operator < (const Url &left, const Url &right)$/;"	f
 operator <<	url.h	/^inline ostream& operator << (ostream &out, const Url &url)$/;"	f
 operator ==	url.h	/^inline bool operator == (const Url &left, const Url &right)$/;"	f
@@ -34,3 +51,4 @@ str_url_	url.h	/^        string str_url_;$/;"	m	class:Url
 url_	page.h	/^            Url url_;$/;"	m	class:Page
 url_scheme_	url.h	/^        UrlScheme url_scheme_;$/;"	m	class:Url
 visit_url	main.cc	/^int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sites)$/;"	f
+~AddrInfo	dns.cc	/^AddrInfo::~AddrInfo()$/;"	f	class:AddrInfo
