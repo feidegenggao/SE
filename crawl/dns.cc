@@ -15,6 +15,7 @@
  *
  * ============================================================================
  */
+#include    "base/types.h"
 #include    "base/log.h"
 using namespace base;
 #include    "dns.h"
@@ -24,30 +25,31 @@ using namespace base;
 #include    <netdb.h>
 #include    <strings.h>
 
-#include    <errno.h>
 #include    <string.h>
+#include    <string>
+using std::string;
 
-void DNS::GetAddrInfoList(string node, string service, AddrInfo &addrinfo)
+void DNS::ResolveNodeService(string node, string service, AddrInfo &addrinfo)
 {
     struct addrinfo *dst_addrinfo = NULL;
-    ResolutionHostName(dst_addrinfo, node, service);
+    ResolutionHostName(&dst_addrinfo, node, service);
 
     addrinfo.SetAddrInfoPointer(dst_addrinfo);
 }
 
-void DNS::ResolutionHostName(struct addrinfo *dst_addrinfo, string node, string service)
+void DNS::ResolutionHostName(struct addrinfo **dst_addrinfo, string node, string service)
 {
     struct addrinfo hints;
 
     bzero(&hints, sizeof(struct addrinfo));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_protocol = 0;
+    hints.ai_protocol = IPPROTO_TCP;
 
-    int rt = getaddrinfo(node.c_str(), service.c_str(), &hints, &dst_addrinfo);
+    int rt = getaddrinfo(node.c_str(), service.c_str(), &hints, dst_addrinfo);
     if (rt != 0)
     {
-        LOG_ERR << "getaddrinfo error:" << strerror(errno);
+        LOG_ERR << "getaddrinfo error:" << gai_strerror(rt);
     }
 }
 
@@ -61,12 +63,16 @@ AddrInfo::~AddrInfo()
     freeaddrinfo(addrinfo_);
 }
 
-struct addrinfo * AddrInfo::GetAddrInfo()
+int AddrInfo::GetAddrInfo(struct sockaddr_in &temp)
 {
-    struct addrinfo *temp = current_pointer_to_addrinfo_;
+    memset(&temp, 0, sizeof(struct sockaddr_in));
     if (current_pointer_to_addrinfo_ != NULL)
+    {
+        memcpy(&temp, current_pointer_to_addrinfo_->ai_addr, current_pointer_to_addrinfo_->ai_addrlen);
         current_pointer_to_addrinfo_ = current_pointer_to_addrinfo_->ai_next;
-    return temp;
+        return SUCCESSFUL;
+    }
+    return FAILED;
 }
 
 void AddrInfo::SetAddrInfoPointer(struct addrinfo *addrinfo_rt)

@@ -29,10 +29,10 @@ class DNS : public Singleton<DNS>
     public:
         //we store the addr info into addrinfo ( type is AddrInfo)
         //we will free the memory in AddrInfo's destructer
-        void GetAddrInfoList(string node, string service, AddrInfo &addrinfo);
+        void ResolveNodeService(string node, string service, AddrInfo &addrinfo);
 
     private:
-        void ResolutionHostName(struct addrinfo *dst_addrinfo, string host, string service);
+        void ResolutionHostName(struct addrinfo **dst_addrinfo, string host, string service);
 };
 
 class AddrInfo
@@ -42,7 +42,10 @@ class AddrInfo
         AddrInfo();
         ~AddrInfo();
 
-        struct addrinfo * GetAddrInfo();
+        //return value:
+        //SUCCESSFUL: temp stored valid data
+        //FAILED:   temp stored invalid data
+        int GetAddrInfo(struct sockaddr_in &temp);
 
     private:
         void SetAddrInfoPointer(struct addrinfo *addrinfo_rt);
