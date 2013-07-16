@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 1)
     {
-        LOG_ERR << "Usage:" << argv[0];
+        LOG_ERROR << "Usage:" << argv[0];
         return FAILED;
     }
 
@@ -84,9 +84,6 @@ void GetSiteSeed(UrlSet &sites_seeds, const string &file_name)
         Url url(url_temp);
         sites_seeds.insert(url);
     }
-
-    for (UrlSetIt it = sites_seeds.begin(); it != sites_seeds.end(); it++)
-        cout << "*it:" << *it << endl;
 }
 
 //return:

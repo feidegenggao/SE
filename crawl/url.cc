@@ -34,29 +34,32 @@ Url::Url(string url):str_url_(url)
 void Url::Analysis()
 {
     //Currently, we only crwal http protocol
-    string src_regex("http://.*");
-    if (Regex::GetInstance()->IfMatch(src_regex, str_url_))
+    string src_regex("http://[^/]*/?");
+    if (RegexMatch(str_url_, src_regex))
     {
         url_scheme_ = SCHEME_HTTP;
         services_ = string("http");
-        string http_url_regex("http://.*/");
-        string http_url_result  = Regex::GetInstance()->GetFirstMatch(http_url_regex, str_url_);
-        LOG_DEBUG << "http_url_result:" << http_url_result;
-        LOG_DEBUG << "str_url_:" << str_url_;
-        node_ = string("www.uestc.edu.cn");
+        string search_regex("http://([^/]*)/?");
+        RegexSearchResultType result;
+        RegexSearch(str_url_, search_regex, result);
+        for (RegexSearchResultItor it = result.begin(); it != result.end(); it++)
+        {
+            node_ = *it;
+        }
     }
 }
 
 void Url::Resolved()
 {
-    LOG_DEBUG << "url:" << str_url_;
     AddrSet addrset_;
     DNS::GetInstance()->ResolveNodeService(node_, services_, addrset_); 
     int rt = addrset_.GetSockAddr(sockaddr_);
     if (rt == SUCCESSFUL)
     {
-        LOG_DEBUG << "Url:" << str_url_ << "'s ip:" << sockaddr_.IPStr()
-                 << "\t port:" << sockaddr_.PortStr();
+        LOG_DEBUG << "node:" << node_;
+        LOG_DEBUG << "services_:" << services_;
+        LOG_DEBUG << "ip:" << sockaddr_.IPStr();
+        LOG_DEBUG  << "port:" << sockaddr_.PortStr();
         if_vaild_ = true;
     }
 }

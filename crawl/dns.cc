@@ -49,7 +49,7 @@ void DNS::ResolutionHostName(struct addrinfo **dst_addrinfo, string node, string
     int rt = getaddrinfo(node.c_str(), service.c_str(), &hints, dst_addrinfo);
     if (rt != 0)
     {
-        LOG_ERR << "getaddrinfo error:" << gai_strerror(rt);
+        LOG_ERROR << "getaddrinfo error:" << gai_strerror(rt);
     }
 }
 

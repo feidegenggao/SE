@@ -40,10 +40,11 @@ namespace base
         return info + "  " +  pid;
     }
 
-#define     LOG_DEBUG   cerr << "\n" << Info() << "  [DEBUG] " << __FILE__ <<":" << __LINE__ << ":  "
-#define     LOG_INFO    cerr << "\n" << Info() << "  [INFO]  " << __FILE__ <<":" << __LINE__ << ":  "
-#define     LOG_WARN    cerr << "\n" << Info() << "  [WARN]  " << __FILE__ <<":" << __LINE__ << ":  "
-#define     LOG_ERR     cerr << "\n" << Info() << "  [ERROR]  " << __FILE__ <<":" << __LINE__ << ":  "
+#define     COMMON_INFO  <<__FILE__<<":"<<__LINE__<< ":\t"
+#define     LOG_DEBUG   cerr << "\n" << Info() << "  [DEBUG] "COMMON_INFO
+#define     LOG_INFO    cerr << "\n" << Info() << "  [INFO]  "COMMON_INFO
+#define     LOG_WARN    cerr << "\n" << Info() << "  [WARN]  "COMMON_INFO
+#define     LOG_ERROR     cerr << "\n" << Info() << "  [ERROR]  "COMMON_INFO
 
 }
 
