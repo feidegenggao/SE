@@ -36,7 +36,7 @@ class Url
     public:
         explicit Url(string url);
         string Str() const { return str_url_;}
-        bool IfVAild() const { return if_vaild_;}
+        bool IfVAild() const { return (if_vaild_ and (url_scheme_ == SCHEME_HTTP));}
 
     private:
         string str_url_;

@@ -25,6 +25,11 @@ using namespace base;
 Regex::Regex()
 {
     errcode_ = 0;
+    cflags_ = 0;
+    eflags_ = 0;
+    nmatch_ = 1;
+    pmatch_ = new regmatch_t[nmatch_];
+
     memset(errbuf_, 0, sizeof(errbuf_));
     errmsglen_ = 0;
 }
@@ -34,11 +39,11 @@ Regex::~Regex()
     regfree(&preg_);
 }
 
-bool Regex::IfMatch(string regex, string dst_text)
+bool Regex::IfMatch(const string &regex, const string &dst_text)
 {
-    if ( (errcode_ = regcomp(&preg_, regex.c_str(), 0)) == 0)
+    if ( (errcode_ = regcomp(&preg_, regex.c_str(), cflags_)) == 0)
     {
-        if ( (errcode_ = regexec(&preg_, dst_text.c_str(), 0, NULL, 0)) == 0)
+        if ( (errcode_ = regexec(&preg_, dst_text.c_str(), 0, NULL, eflags_)) == 0)
         {
             return true;
         }
@@ -47,6 +52,27 @@ bool Regex::IfMatch(string regex, string dst_text)
     PrintErrMsg();
 
     return false;
+}
+
+string Regex::GetFirstMatch(const string &regex, const string &dst_text)
+{
+    string match_str;
+    if ( (errcode_ = regcomp(&preg_, regex.c_str(), cflags_) ) == 0)
+    {
+        if ( (errcode_ = regexec(&preg_, dst_text.c_str(), nmatch_, pmatch_, eflags_) ) == 0)
+        {
+            if (pmatch_->rm_so != -1)
+            {
+                string temp(dst_text, pmatch_->rm_so, pmatch_->rm_eo - pmatch_->rm_so);
+                match_str = temp;
+            }
+
+            return match_str;
+        }
+    }
+
+    PrintErrMsg();
+    return match_str;
 }
 
 void Regex::PrintErrMsg()
