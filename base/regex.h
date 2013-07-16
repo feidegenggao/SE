@@ -43,6 +43,19 @@ namespace base
             //Currently, we only want to use the position of first match,
             //We may want to use the more position , i should fix this problem
             //
+            //SOLUTION:
+            //The problem is my fault, If you want to get more than one positions 
+            //that match the regex, you should give the value "(t).*(t)" to regex
+            //so you can get two positions of 't' that match the h't''t'p 
+            //
+            //FIXME:
+            //Problem 2:
+            //regex: "http://.*/?"
+            //dst_text: "http://www.taobao.com/"
+            //The result should match , but this system call (regexec) can't match
+            //What's wrong ? I have NOT found the reason. WHY?
+            //So, i will use boost::regex instead of this system call (regcomp();
+            //regexec);
             string GetFirstMatch(const string &regex, const string &dst_text);
 
         private:
