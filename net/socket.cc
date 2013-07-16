@@ -31,8 +31,3 @@ Socket::Socket(int domain, int type, int protocol)
     sockfd_ = socket(domain, type, protocol);
     assert(sockfd_ > 0);
 }
-
-int Socket::connect(const socket_addr &addr)
-{
-
-}

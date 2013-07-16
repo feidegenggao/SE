@@ -37,7 +37,7 @@ int main()
     LOG_INFO << "first_socket_addr's ip :" << first_socket_addr.IPStr();
     LOG_INFO << "first_socket_addr's port:" << first_socket_addr.PortStr();
 
-    SockAddr second_socket_addr(first_socket_addr.IPStr(), first_socket_addr.PortStr());
+    SockAddr second_socket_addr(first_socket_addr.IPStr(), first_socket_addr.PortNum());
     //SockAddr second_socket_addr("192.168.13.88", "8080");
     LOG_INFO << "second_socket_addr's ip:" << second_socket_addr.IPStr();
     LOG_INFO << "second_socket_addr's port:" << second_socket_addr.PortStr();

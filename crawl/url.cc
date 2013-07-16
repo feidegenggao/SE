@@ -28,7 +28,10 @@ Url::Url(string url):str_url_(url)
     url_scheme_ = SCHEME_INVALID;
     if_vaild_ = false;
     Analysis();
-    Resolved();
+    if (url_scheme_ == SCHEME_HTTP)
+    {
+        Resolved();
+    }
 }
 
 void Url::Analysis()

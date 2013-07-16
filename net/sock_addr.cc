@@ -29,34 +29,41 @@ using std::stringstream;
 
 #include    <stdlib.h>
 
-SockAddr::SockAddr()
-{
-
-}
-
-SockAddr::SockAddr(struct sockaddr_in sock_addr)
+SockAddr::SockAddr(uint16_t port)
 {
     init();
 
-    sockaddr_in_ = sock_addr;
-    ConvertSockAddrToString();
+    assert(port > 0 or port < 655535);
+    sockaddr_in_.sin_family = AF_INET;
+    sockaddr_in_.sin_addr.s_addr = htonl(INADDR_ANY);
+    sockaddr_in_.sin_port   = htons(port);
 }
 
-SockAddr::SockAddr(string ipaddr, string port)
+SockAddr::SockAddr(const string &ipaddr, uint16_t port)
 {
     init();
-
-    ipaddr_ = ipaddr;
-    port_ = port;
-    ConvertStringToSockAddr();
+    ConvertToSockAddr(ipaddr, port);
 }
 
 void SockAddr::init()
 {
-    bzero(&sockaddr_in_, sizeof(struct sockaddr_in));
+    bzero(&sockaddr_in_, sizeof(sockaddr_in_));
 }
 
-void SockAddr::ConvertSockAddrToString()
+void SockAddr::ConvertToSockAddr(const string &ipaddr, uint16_t port)
+{
+    sockaddr_in_.sin_family = AF_INET;
+
+    int rt = inet_pton
+        (AF_INET, ipaddr.c_str(), &sockaddr_in_.sin_addr);
+    assert(rt == 1);
+
+    assert(port > 0 or port < 655535);
+    sockaddr_in_.sin_port = htons(port);
+}
+
+
+string SockAddr::IPStr() const
 {
     const int MAXLENFORIPADDR = 50;
     char temp[MAXLENFORIPADDR];
@@ -65,24 +72,22 @@ void SockAddr::ConvertSockAddrToString()
     const char *rt = inet_ntop
         (AF_INET, &sockaddr_in_.sin_addr, temp, sizeof(temp));
     assert(rt != NULL);
-    ipaddr_ = string(temp);
+    return string(temp);
+}
+
+string SockAddr::PortStr() const
+{
+    string port_;
 
     int port_n = ntohs(sockaddr_in_.sin_port);
-    assert(port_n > 0 or port_n < 655535);
     stringstream tempstream;
     tempstream << port_n;
     tempstream >> port_;
+
+    return port_;
 }
 
-void SockAddr::ConvertStringToSockAddr()
+int SockAddr::PortNum() const
 {
-    sockaddr_in_.sin_family = AF_INET;
-
-    int rt = inet_pton
-        (AF_INET, ipaddr_.c_str(), &sockaddr_in_.sin_addr);
-    assert(rt == 1);
-
-    int port_n = atoi(port_.c_str());
-    assert(port_n > 0 or port_n < 655535);
-    sockaddr_in_.sin_port = htons(port_n);
+    return ntohs(sockaddr_in_.sin_port);
 }

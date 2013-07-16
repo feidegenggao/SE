@@ -26,10 +26,13 @@ Page::Page(const Url &url):url_(url)
 
 void Page::VisitUrl()
 {
+    if (!url_.IfValid()) return;
+    //Only when the url_ is valid , we will visit the url_
     LOG_DEBUG << "visit url";
 }
 
 void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
 {
+    if (!url_.IfValid()) return;
     LOG_DEBUG << "get unvisited url";
 }

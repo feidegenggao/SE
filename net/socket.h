@@ -27,8 +27,6 @@ namespace net
             Socket();
             Socket(int domain, int type, int protocol);
 
-            int connect(const socket_addr &addr);
-
         private:
             int sockfd_;
     };
