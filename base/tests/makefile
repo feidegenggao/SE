@@ -6,7 +6,7 @@ singleton:
 	g++ test_singleton.cc $(BASE_COMPLIE_FILES) -g -o test_singleton.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION)
 
 regex:
-	g++ test_regex.cc $(PROJECT_ROOT_DIR)/base/regex.cc $(BASE_COMPLIE_FILES) -g -o test_regex.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION)
+	g++ test_regex.cc $(PROJECT_ROOT_DIR)/base/regex.cc $(BASE_COMPLIE_FILES) -g -o test_regex.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -lboost_regex
 
 clean:
 	rm *.out

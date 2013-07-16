@@ -15,73 +15,32 @@
  *
  * ============================================================================
  */
-#include    "base/log.h"
 #include    "base/regex.h"
-using namespace base;
 
-#include    <sys/types.h>
-#include    <string.h>
-
-Regex::Regex()
+#include    <boost/regex.hpp>
+bool base::RegexMatch(const string &s, const string &regex)
 {
-    errcode_ = 0;
-    cflags_ = 0;
-    eflags_ = 0;
-    nmatch_ = 1;
-    pmatch_ = new regmatch_t[nmatch_];
+    boost::regex reg(regex.c_str());
+    boost::smatch match_result;
 
-    memset(errbuf_, 0, sizeof(errbuf_));
-    errmsglen_ = 0;
+    return boost::regex_match(s, match_result, reg);
 }
 
-Regex::~Regex()
+bool base::RegexSearch(const string &s, const string &regex, RegexSearchResultType &result)
 {
-    regfree(&preg_);
-}
+    boost::regex reg(regex.c_str());
+    boost::smatch search_result;
 
-bool Regex::IfMatch(const string &regex, const string &dst_text)
-{
-    if ( (errcode_ = regcomp(&preg_, regex.c_str(), cflags_)) == 0)
+    result.clear();
+    if (boost::regex_search(s, search_result, reg))
     {
-        if ( (errcode_ = regexec(&preg_, dst_text.c_str(), 0, NULL, eflags_)) == 0)
+        for (size_t i = 1; i != search_result.size(); i++)
         {
+            string temp(search_result[i]);
+            result.push_back(temp);
             return true;
         }
     }
 
-    PrintErrMsg();
-
     return false;
-}
-
-string Regex::GetFirstMatch(const string &regex, const string &dst_text)
-{
-    string match_str;
-    if ( (errcode_ = regcomp(&preg_, regex.c_str(), cflags_) ) == 0)
-    {
-        if ( (errcode_ = regexec(&preg_, dst_text.c_str(), nmatch_, pmatch_, eflags_) ) == 0)
-        {
-            if (pmatch_->rm_so != -1)
-            {
-                string temp(dst_text, pmatch_->rm_so, pmatch_->rm_eo - pmatch_->rm_so);
-                match_str = temp;
-            }
-
-            return match_str;
-        }
-    }
-
-    PrintErrMsg();
-    return match_str;
-}
-
-void Regex::PrintErrMsg()
-{
-    if (errcode_ == REG_NOMATCH) return;
-
-    errmsglen_ = regerror(errcode_, &preg_, errbuf_, sizeof(errbuf_));
-    errmsglen_ = errmsglen_ < sizeof(errbuf_) ? (errmsglen_) : (sizeof(errbuf_) - 1);
-    errbuf_[errmsglen_] = '\0';
-
-    LOG_ERR << "Regex:" << errbuf_;
 }
