@@ -58,12 +58,18 @@ void PrintAddrInfo(SockAddr result)
     LOG_DEBUG << "result's port:" << result.PortStr();
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     LOG_DEBUG << "Start...";
+    if (argc != 2)
+    {
+        LOG_INFO << "Usage:" << argv[0] << "url";
+        LOG_END;
+        return -1;
+    }
     AddrSet temp_addr_set;
     //DNS::GetInstance()->ResolveNodeService("www.uestc.edu.cn", "http", temp_addr_set);
-    DNS::GetInstance()->ResolveNodeService("www.jwc.uestc.edu.cn", "http", temp_addr_set);
+    DNS::GetInstance()->ResolveNodeService(argv[1], "http", temp_addr_set);
     //DNS::GetInstance()->ResolveNodeService("222.197.183.103", "http", temp_addr_set);
 
     SockAddr result;
@@ -77,6 +83,6 @@ int main()
     }while(true);
 
 
-    LOG_DEBUG << "end\n";
+    LOG_END;
     return 0;
 }

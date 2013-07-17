@@ -66,10 +66,9 @@ int main(int argc, char *argv[])
         cur_deepth--;
     }
 
-    cerr << "\n" << endl;
+    LOG_END;
     return SUCCESSFUL;
 }
-
 
 void GetSiteSeed(UrlSet &sites_seeds, const string &file_name)
 {

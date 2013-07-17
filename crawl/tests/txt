@@ -1,0 +1,546 @@
+
+2013-07-17 17:52:58.559587  16638  [DEBUG] /root/lxf/se/crawl/url.cc:65:	node:www.uestc.edu.cn
+2013-07-17 17:52:58.559721  16638  [DEBUG] /root/lxf/se/crawl/url.cc:66:	services_:http
+2013-07-17 17:52:58.559747  16638  [DEBUG] /root/lxf/se/crawl/url.cc:67:	source_url_:/
+2013-07-17 17:52:58.559773  16638  [DEBUG] /root/lxf/se/crawl/url.cc:68:	ip:202.112.14.184
+2013-07-17 17:52:58.559803  16638  [DEBUG] /root/lxf/se/crawl/url.cc:69:	port:80
+2013-07-17 17:52:58.559828  16638  [DEBUG] /root/lxf/se/crawl/page.cc:35:	visit url
+2013-07-17 17:52:58.573056  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :2152
+2013-07-17 17:52:58.573096  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	
+Date: Wed, 17 Jul 2013 09:36:42 GMT
+Server: Microsoft-IIS/6.0
+X-Powered-By: ASP.NET
+X-AspNet-Version: 2.0.50727
+Set-Cookie: ASP.NET_SessionId=bvm1g355zh5fsmi43fih5y2p; path=/; HttpOnly
+Cache-Control: private
+Content-Type: text/html; charset=utf-8
+Content-Length: 36440
+X-Cache: MISS from 192.168.0.1
+X-Cache-Lookup: MISS from 192.168.0.1:3128
+Via: 1.0 192.168.0.1 (squid/3.0.STABLE25)
+Connection: keep-alive
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+	<HEAD>
+		<title>电子科技大学</title> 
+		<!--
+//----------------------------------------------------------------
+// Copyright (C) 2003-2006 电子科技大学  wangdong@uestc.edu.cn
+// 
+// 项目名称		电子科技大学综合信息网
+// 版本说明		V3.0
+// 开发人		刘鹏 江帆 王东 
+// 开发时间		2006.6
+// 修改者		
+// 修改时间		
+// 修改简单说明	
+// 其他			
+//----------------------------------------------------------------
+-->
+		<link href="images/main.css" rel="stylesheet" type="text/css">
+			<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+			<meta content="Author" name="刘鹏 江帆 王东">
+			<style type="text/css"> 
+			.STYLE1 { COLOR: #333333 } 
+			.style2 {
+	color: #FF0000;
+	font-size: 9px;
+}
+            </style>
+			<script type="text/JavaScript">
+<!--
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+			</script>
+
+			
+	</HEAD>
+
+
+	<script language="JavaScript1.1">
+<!--
+var slidespeed=3000
+var slideimages=new Array("images/d-cpyc.jpg","images/d-cjxz.jpg","images/d-zpgw.jpg")
+var slidelinks=new Array("http://www.uestc.edu.cn/yingcai.html","http://www.uestc.edu.cn/changjiang.html","http://www.pd.uestc.edu.cn/cpyc/zpgw.asp")
+
+var imageholder=new Array()
+var ie55=window.createPopup
+for (i=0;i<slideimages.length;i++){
+imageholder[i]=new Image()
+imageholder[i].src=slideimages[i]
+}
+
+function gotoshow(){
+window.open(slidelinks[whichlink])
+//wind
+2013-07-17 17:52:58.573404  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.573444  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	ow.location=slidelinks[whichlink]
+}
+//-->
+</script>
+
+
+
+	<body>
+		<table width="990" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td height="10">&nbsp;</td>
+			</tr>
+		</table>
+		<table width="990" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td><object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"
+						height="200" width="995" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+                <param name="_cx" value="26326" />
+                <param name="_cy" value="6615" />
+                <param name="FlashVars" value="" />
+                <param name="Movie" value="images/main_navi3.swf" />
+                <param name="Src" value="images/main_navi3.swf" />
+                <param name="WMode" value="Window" />
+                <param name="Play" value="-1" />
+                <param name="Loop" value="-1" />
+                <param name="SAlign" value="" />
+                <param name="Menu" value="-1" />
+                <param name="Base" value="" />
+                <param name="AllowScriptAccess" value="" />
+                <param name="Scale" value="ShowAll" />
+                <param name="DeviceFont" value="0" />
+                <param name="EmbedMovie" value="0" />
+                <param name="BGColor" value="" />
+                <param name="SWRemote" value="" />
+               
+2013-07-17 17:52:58.573680  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :2896
+2013-07-17 17:52:58.573882  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	 <param name="MovieData" value="" />
+                <param name="SeamlessTabbing" value="1" />
+                <param name="Profile" value="0" />
+                <param name="ProfileAddress" value="" />
+                <param name="ProfilePort" value="0" />
+                <param name="wmode" value="opaque" />
+                <param name="QUALITY" value="high" />
+                <embed src="images/main_navi3.swf" width="995" height="200" pluginspage="http://www.macromedia.com/go/getflashplayer"
+							type="application/x-shockwave-flash" _cx="26326" _cy="6615" flashvars="" wmode="opaque" salign="" menu="-1" base="" allowscriptaccess="" devicefont="0" embedmovie="0" swremote="" moviedata="" seamlesstabbing="1" profile="0" profileaddress="" profileport="0" quality="high"> </embed>
+              </object></td>
+			</tr>
+		</table>
+		<table width="995" height="5" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table width="995" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="238" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="5"></td>
+						</tr>
+					</table>
+					<table width="95%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="20" valign="middle">&nbsp;<img src="images/caption_1.gif" width="86" height="16" /></td>
+						</tr>
+					</table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="7"><img src="images/line_1.gif" width="229" height="3" /></td>
+						</tr>
+					</table>			  
+					<table width="229" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="1" background="images/bg_2.gif"></td>
+                        <td align="left" background="images/bg_6.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td height="9"></td>
+                          </tr>
+                        </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;<span class="STYLE1"><a href="http://www.jwc.uestc.edu.cn" target="_blank">普通本科教学管理（教务处）</a></span></td>
+                          </tr>
+                          
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://gr.uestc.edu.cn" target="_blank">硕士、博士培养（研究生院）</a></td>
+                          </tr>
+                          <tr>
+                   
+2013-07-17 17:52:58.573915  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.573939  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	         <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://xkjs.uestc.edu.cn" target="_blank">学科建设（研究生院）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.czj.uestc.edu.cn" target="_blank">成教/网络/自考（继续教育学院）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.px.uestc.edu.cn" target="_blank">非学历培训（继续教育学院）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://teacher.uestc.edu.cn/index.html" target="_blank">互动教学空间（信息中心）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.rd.uestc.edu.cn" target="_blank">科研信息咨询（科学技术发展研究院）</a></td>
+                          </tr>
+                          <tr>
+           
+2013-07-17 17:52:58.575404  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :5120
+2013-07-17 17:52:58.575444  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	                 <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.id.uestc.edu.cn" target="_blank">电子科技大学国家大学科技园</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://video.wlxt.uestc.edu.cn/dvcd" target="_blank">DV成电（信息中心）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.lib.uestc.edu.cn" target="_blank">在线数字图书（图书馆）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.jpkc.uestc.edu.cn" target="_blank">精品课程（信息中心）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.icourses.edu.cn" target="_blank">中国大学视频公开课</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.xxgk.uestc.edu.cn/sfzx/" target="_blank">国家实验教学示范中心建设专栏</a></td>
+                          </tr>
+                          
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.emba.uestc.edu.cn/" target="_blank">EMBA高级管理人员工商管理硕士</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.etfid.uestc.edu.cn" target="_blank">电子薄膜与集成器件国家重点实验室</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.ncl.uestc.edu.cn" target="_blank">通信抗干扰技术国家级重点实验室</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://riest.uestc.edu.cn/" target="_blank">电子科学技术研究院（含科研产品）</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.czj.uestc.edu.cn/abroad/" target="_blank">出国留学预备教育中心</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.114.edu.cn" target="_blank">教育网导航</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.10ms.edu.cn" target="_blank">10毫秒级高速资源</a></td>
+                          </tr>
+                          <tr>
+                            <td height="20">&nbsp;&nbsp;<img src="images/icon_3.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="hezuo/index.html" target="_blank">中外合作办学专栏</a></td>
+                          </tr>
+                        </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td height="9"></td>
+                            </tr>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td align="center">
+                                  <select name="menu1" onchange="MM_jumpMenu('parent',this,0)">
+                                    <option value="#" selected="selected">--进入电子科技大学院系所--</option>
+                                    <option value="http://www.scie.uestc.edu.cn/">通信与信息工程学院</option>
+                                    <option value="http://www.ee.uestc.edu.cn/">电子工程学院</option>
+                                    <option value="http://www.me.uestc.edu.cn">微电子与固体电子学院</option>
+                                    <option value="http://www.pe.uestc.edu.cn/">物理电子学院</option>
+                           
+2013-07-17 17:52:58.575642  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :5120
+2013-07-17 17:52:58.575680  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	         <option value="http://www.ccse.uestc.edu.cn/">计算机科学与工程学院</option>
+                                    <option value="http://www.auto.uestc.edu.cn/">自动化工程学院</option>
+                                    <option value="http://www.jxdz.uestc.edu.cn">机械电子工程学院</option>
+                                    <option value="http://www.soei.uestc.edu.cn">光电信息学院</option>
+                                    <option value="http://www.life.uestc.edu.cn">生命科学与技术学院</option>
+                                    <option value="http://www.math.uestc.edu.cn/">数学科学学院</option>
+                                    <option value="http://www.mgmt.uestc.edu.cn/">经济与管理学院</option>
+                                    <option value="http://www.rw.uestc.edu.cn">政治与公共管理学院</option>
+                                    <option value="http://www.fl.uestc.edu.cn">外国语学院</option>
+                                    <option value="http://www.iaa.uestc.edu.cn">航空航天学院/空天科学技术研究院</option>
+                                    <option value="http://www.sport.uestc.edu.cn/">体育部</option>
+                                    <option value="http://www.ss.uestc.edu.cn">信息与软件工程学院(示范性软件学院)</option>
+                                    <option value="http://www1.cduestc.cn">成都学院</option>
+                                    <option value="http://www.zsc.edu.cn ">中山学院</option>
+                                    <option value="http://riest.uestc.edu.cn/">电子科学技术研究院</option>
+                                    <option value="http://www.ncl.uestc.edu.cn/">通信抗干扰技术国家级重点实验室</option>
+                                    <option value="http://www.oice.uestc.edu.cn/">国际教育学院</option>
+                                    <option value="http://www.dgieie.com">东莞电子科技大学电子信息工程研究院</option>
+                                    <option value="http://www.my.uestc.edu.cn/marxism/">马克思主义教育学院</option>
+                                    <option value="http://www.yingcai.uestc.edu.cn">英才实验学院</option>
+                                    <option value="http://www.energy.uestc.edu.cn">能源科学与工程学院</option>
+                                    <option value="http://www.sre.uestc.edu.cn">资源与环境学院</option>
+                                    <option value="http://www.gla.uestc.edu.cn">格拉斯哥学院</option>
+                                    <option value="http://www.wxcdkd.com">无锡研究院</option>
+                                    <option value="http://www.cdyjy.uestc.edu.cn">电子科技大学成都研究院</option>
+                                  </select>
+                             </td>
+                            </tr>
+                          </table>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td height="9"></td>
+                            </tr>
+                          </table></td>
+                      </tr>
+                  </table></td>
+			  <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="5"></td>
+						</tr>
+					</table>
+					<table width="470" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="20" valign="middle">&nbsp;<img src="images/caption_3.gif" width="59" height="16" /></td>
+						    <td align="right" valign="middle"><a href="http://www.news.uestc.edu.cn" target="_blank">&gt;&gt; 新闻中心</a></td>
+						</tr>
+					</table>
+		            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="7"><img src="images/line_3.gif" width="470" height="3" /></td>
+						</tr>
+			  </table>
+			        <table width="100%" height="380" border="0" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="470" height="390"><iframe width="470" height="390" frameborder="0" scrolling="No" src="http://www.uestc.edu.cn/newscenter/UESTCDefault3.xml"></iframe></td>
+                      </tr>
+                    </table>
+			        <table width="470" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td height="12" background="images/div2.gif"></td>
+                      </tr>
+                      <tr>
+                        <td height="20"></td>
+                      </tr>
+                    </table>
+                    <table width="470" border="0" cellspacing="0" cellpadding="0">
+                      
+                      <tr>
+                        <td><a href="http://epaper.uestc.edu.cn" target="_blank"><img src="images/uestc_epaper.gif" border="0" /></a></td>
+                        <td align="left"><a href="http://www.news.uestc.ed
+2013-07-17 17:52:58.575940  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :4448
+2013-07-17 17:52:58.575978  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	u.cn/VideoView.aspx?typeID=7" target="_blank"><img src="images/uestc_video.gif" border="0" /></a></td>
+                        <td align="right"><select name="select2" onchange="MM_jumpMenu('parent',this,0)">
+                          <option selected="selected">--进入电子科技大学校园热点--</option>
+                          <option value="http://www.stuhome.net">学生之家</option>
+                          <option value="http://www.dormforce.net">栋力无限</option>
+                          <option value="http://www.afchengdu.org/">法语培训中心（成都法语联盟）</option>
+                          <option value="http://www.gr.uestc.edu.cn/211/">211工程网</option>
+                          <option value="http://www.moe.edu.cn/">教育部</option>
+                          <option value="http://www.most.gov.cn/">科技部</option>
+                          <option value="http://www.scedu.net/">省教育厅</option>
+                          <option value="http://www.sckw.sichuan.net.cn/info/2ITI6PDSbc.jsp">省科技厅</option>
+                          <option value="http://www.edu.cn/">教育科研网</option>
+                          <option value="http://www.scsz.uestc.edu.cn/">四川高校思政网</option>
+                          <option value="http://www.szdc.uestc.edu.cn">四川省大学生思想状况调查</option>
+                          <option value="http://www.lkx.uestc.edu.cn/">电子科大老科协</option>
+                          <option value="http://www.sz2011.org">第26届世界大运会</option>
+                          <option value="http://www.psy.uestc.edu.cn">心灵之家</option>
+                          <option value="http://ielab.uestc.edu.cn">电子科技大学智能工程实验室</option>
+                        </select></td>
+                      </tr>
+                    </table>                    </td>
+				<td width="277" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td height="5"></td>
+                              </tr>
+                            </table>							  
+							  <table width="93%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td height="20">&nbsp;<img src="images/caption.gif" width="87" height="16" /></td>
+                                </tr>
+                              </table>							  
+							  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td height="7"><img src="images/line_2.gif" width="278" height="3" /></td>
+                                </tr>
+                              </table></td>
+						</tr>
+					</table>
+			    <table width="278" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td background="images/bg_6.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td height="50" align="left" valign="top"><img src="images/service.gif" width="256" height="57" /></td>
+                      </tr>
+                    </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td width="50%" height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.uestczs.net" target="_blank">普通本科招生</a></td>
+                          <td width="50%">&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://mail.uestc.edu.cn" target="_blank">教师邮件系统</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://yz.uestc.edu.cn" target="_blank">研究生招生</a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.pd.uestc.edu.cn" target="_blank">人事处</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<im
+2013-07-17 17:52:58.576590  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :5120
+2013-07-17 17:52:58.576629  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	g src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.czj.uestc.edu.cn" target="_blank">成教/网络/自考</a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.jcc.uestc.edu.cn" target="_blank">计划财务处</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://cwjf.uestc.edu.cn/wingsoft/webFee/index.jsp" target="_blank">学生网上缴费</a><a href="http://202.112.14.185/department/default.aspx?site=92" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.news.uestc.edu.cn/vis/" target="_blank">视觉识别系统</a><a href="http://www.jcc.uestc.edu.cn" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.xgb.uestc.edu.cn" target="_blank">学生工作</a><a href="http://202.112.14.185/department/default.aspx?site=92" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.oice.uestc.edu.cn/" target="_blank">国际合作与交流</a><a href="http://www.news.uestc.edu.cn/vis/" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.tuanwei.uestc.edu.cn" target="_blank">校团委</a><a href="http://www.scxgzx.net" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.spead.uestc.edu.cn" target="_blank">国有资产管理</a><a href="http://www.oice.uestc.edu.cn/news/index.aspx" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.jiuye.org" target="_blank">本科生就业</a><a href="http://www.tuanwei.uestc.edu.cn" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://living.uestc.edu.cn/" target="_blank">后勤综合服务平台</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://gr.uestc.edu.cn/job" target="_blank">研究生就业</a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://epaper.uestc.edu.cn" target="_blank">校报电子版</a><a href="http://www.lu.uestc.edu.cn" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp; &nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.alumni.uestc.edu.cn" target="_blank">校友会</a><a href="http://www.gr.uestc.edu.cn:8080/job/index.shtml" target="_blank"></a><a href="http://www.tuanwei.uestc.edu.cn" target="_blank"></a><a href="http://www.jiuye.org" target="_blank"></a><a href="http://www.edf.uestc.edu.cn" target="_blank"> 基金会 </a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.gh.uestc.edu.cn" target="_blank">校工会</a><a href="http://epaper.uestc.edu.cn" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.dormforce.net" target="_blank">栋力无限</a><a href="http://www.alumni.uestc.edu.cn" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.dzkdfx.cn" target="_blank">电子科大附小</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.gfs.uestc.edu.cn" target="_blank">国防生信息网</a><a href="http://www.alumni.uestc.edu.cn" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://portal.uestc.edu.cn" target="_blank">信息门户系统</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.oi
+2013-07-17 17:52:58.576664  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :424
+2013-07-17 17:52:58.576688  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	ce.uestc.edu.cn/list.php?id=17" target="_blank">出国留学招生</a><a href="http://www.alumni.uestc.edu.cn" target="_blank"></a></td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;<a href="http://press.uestc.edu.cn/" target="_blank"> 电子科大出版社</a><a href="http://www.tzb.uestc.edu.cn" target="_blank"></a></td>
+                        </tr>
+           
+2013-07-17 17:52:58.577642  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :600
+2013-07-17 17:52:58.577681  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	             <tr>
+                          <td height="20">&nbsp;</td>
+                          <td>&nbsp;&nbsp;<img src="images/icon_4.jpg" width="3" height="3" />&nbsp;<a href="http://www.tzb.uestc.edu.cn" target="_blank"> 统战部</a><a href="http://www.zb.uestc.edu.cn" target="_blank"></a><a href="http://press.uestc.edu.cn/" target="_blank"> </a></td>
+                        </tr>
+                      </table>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td height="30">
+2013-07-17 17:52:58.578137  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.578175  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	<a href="http://www.xxgk.uestc.edu.cn/xxgk/" target="_blank"><img src="images/xinxigongkai.gif" width="265" height="20" border="0" longdesc="http://www.xxgk.uestc.edu.cn/xxgk/" /></a></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        
+                        <tr>
+                          <td width="64%" height="20">&nbsp;&nbsp;<img src="images/icon_5.jpg" width="3" height="3" />&nbsp; <a href="http://www.zb.uestc.edu.cn" target="_blank">电子科技大学招标信息网</a></td>
+                          <td width="36%" rowspan="4"><a href="javascript:gotoshow()"><img src="images/d-cpyc.jpg" name="slide" border=0 style="filter:progid:DXImageTransform.Microsoft.Pixelate(MaxSquare=15,Duration=1)"></a></td>
+                          <script language="JavaScript1.1">
+<!--
+var whichlink=0
+var whichimage=0
+var pixeldelay=(ie55)? document.images.slide.filters[0].duration*1000 : 0
+function slideit(){
+if (!document.images) return
+if (ie55) document.images.slide.filters[0].apply()
+document.images.slide.src=imageholder[whichimage].src
+if (ie55) document.images.slide.filters[0].play()
+whichlink=whichimage
+whichimage=(whichimage<slideimages.length-1)? whichimage+1 : 0
+setTimeout("slideit()",slidespeed+pixeldelay)
+}
+slideit()
+//-->
+</script>
+                        </tr>
+                 
+2013-07-17 17:52:58.579362  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :600
+2013-07-17 17:52:58.579401  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	       
+                        
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;<img src="images/icon_5.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://xkjs.uestc.edu.cn/listCommunion.mm" target="_blank">电子科技大学学术活动信息</a><a href="http://www.uestcp.com.cn/" target="_blank"></a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;<img src="images/icon_5.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.icsgce.com/" target="_blank">IEEE ICSGCE 国际
+2013-07-17 17:52:58.579887  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.579926  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	会议</a></td>
+                        </tr>
+                        <tr>
+                          <td height="20">&nbsp;&nbsp;<img src="images/icon_5.jpg" width="3" height="3" />&nbsp;&nbsp;<a href="http://www.mmwcst.org" target="_blank">IEEE MMWCST 国际会议</a></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td height="9"></td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        
+                        <tr>
+                          <td align="center">
+                              <select name="select" onchange="MM_jumpMenu('parent',this,0)">
+                                <option value="#" selected="selected">--进入电子科技大学学校部门--</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=64">学校办公室</option>
+                                <option value="http://www.jjs.uestc.edu.cn">纪律检查委员会</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=66">党委组织部</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=67">党委�
+2013-07-17 17:52:58.581121  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :600
+2013-07-17 17:52:58.581161  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	��传部</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=68">党委学生工作部</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=69">党委统战部</option>
+                                <option value="http://www.pd.uestc.edu.cn">人事处</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=71">教务处</option>
+                                <option value="http://www.rd.uestc.edu.cn">科学技术发展研究院
+2013-07-17 17:52:58.581574  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.581612  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=73">研究生院</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=93">合作发展部</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=74">计划财务处</option>
+                                <option value="http://www.spead.uestc.edu.cn">国有资产与实验管理处</option>
+                                <!--<option value="http://202.112.14.185/department/default.aspx?site=75">国有资产与实验管理处</option>-->
+								
+								<option value="http://www.oice.uestc.edu.cn">国际合作与交流处</option>
+								<option value="http://202.112.14.185/department/default.aspx?site=77">资产公司</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=78">保卫处</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=79">继续教育学院</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=80">基建处</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=81">后勤管理处</option>
+                                <option value="http://202.112.14.185/department/defau
+2013-07-17 17:52:58.582862  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :600
+2013-07-17 17:52:58.582901  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	lt.aspx?site=82">离退休工作处</option>
+                                <option value="http://www.gh.uestc.edu.cn">校工会</option>
+                                <option value="http://www.tuanwei.uestc.edu.cn">校团委</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=85">信息中心</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=87">出版社</option>
+                                <option value="http://202.112.14.185/department/Default.aspx?site=88">学报编�
+2013-07-17 17:52:58.583334  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :1448
+2013-07-17 17:52:58.583373  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	��部</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=89">图书馆</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=90">档案馆</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=91">后勤集团</option>
+                                <option value="http://www.hospital.uestc.edu.cn">校医院</option>
+                                <option value="http://www.oice.uestc.edu.cn">国际教育学院</option>
+                                <option value="http://202.112.14.185/department/default.aspx?site=94">体育场馆管理中心</option>
+                                <option value="http://gwh.uestc.edu.cn">沙河校区管理委员会</option>
+                              </select>                          </td>
+                        </tr>
+                      </table>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td height="9"></td>
+                        </tr>
+                      </table></td>
+                  </tr>
+                </table></td>
+			</tr>
+		</table>
+	
+		<table width="995" border="0" align="center" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td height="20" background="images/bg_4.gif">&nbsp;&nbsp;&nbsp;&n
+2013-07-17 17:52:58.584666  16638  [DEBUG] /root/lxf/se/crawl/http.cc:68:	read from server :496
+2013-07-17 17:52:58.584704  16638  [DEBUG] /root/lxf/se/crawl/http.cc:69:	bsp;<span class="STRONG">电子科技大学@版权所有　</span>沙河校区地址:成都市建设北路二段四号 邮编:610054　　　清水河校区地址:成都市高新区（西区）西源大道2006号 邮编：611731<br />
+　　电话查号台:028-83201114 　　沙河校区网络故障服务热线：028-83203691 　　清水河校区网络故障服务热线：028-61830222 　　数字校园应用系统服务热线：028-61831184</td>
+			</tr>
+		</table>
+    </body>
+</HTML>

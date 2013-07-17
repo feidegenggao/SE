@@ -36,7 +36,10 @@ class Url
     public:
         explicit Url(string url);
         string Str() const { return str_url_;}
+        string GetSourceDataUrl() const { return source_url_;}
+        string GetNode() const { return node_;}
         bool IfValid() const { return (if_vaild_ and (url_scheme_ == SCHEME_HTTP));}
+        const SockAddr& GetSockAddr() const { return sockaddr_;}
 
     private:
         string str_url_;
@@ -46,6 +49,7 @@ class Url
         UrlScheme url_scheme_;
         string node_;
         string services_;
+        string source_url_;
         bool if_vaild_;
         //the first sockaddr in AddrSet
         SockAddr sockaddr_;

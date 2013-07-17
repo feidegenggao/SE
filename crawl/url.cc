@@ -37,18 +37,21 @@ Url::Url(string url):str_url_(url)
 void Url::Analysis()
 {
     //Currently, we only crwal http protocol
-    string src_regex("http://[^/]*/?");
+    string src_regex("http://[^/]*/?.*");
     if (RegexMatch(str_url_, src_regex))
     {
         url_scheme_ = SCHEME_HTTP;
         services_ = string("http");
-        string search_regex("http://([^/]*)/?");
+
+        string search_node_regex("http://([^/]*)/?");
         RegexSearchResultType result;
-        RegexSearch(str_url_, search_regex, result);
-        for (RegexSearchResultItor it = result.begin(); it != result.end(); it++)
-        {
-            node_ = *it;
-        }
+        RegexSearch(str_url_, search_node_regex, result);
+        node_ = *result.begin();
+
+        string search_sourceurl_regex("http://[^/]*(/.*)");
+        result.clear();
+        RegexSearch(str_url_, search_sourceurl_regex, result);
+        source_url_ = *result.begin();
     }
 }
 
@@ -59,10 +62,13 @@ void Url::Resolved()
     int rt = addrset_.GetSockAddr(sockaddr_);
     if (rt == SUCCESSFUL)
     {
+        /*
         LOG_DEBUG << "node:" << node_;
         LOG_DEBUG << "services_:" << services_;
+        LOG_DEBUG << "source_url_:" << source_url_;
         LOG_DEBUG << "ip:" << sockaddr_.IPStr();
         LOG_DEBUG  << "port:" << sockaddr_.PortStr();
+        */
         if_vaild_ = true;
     }
 }

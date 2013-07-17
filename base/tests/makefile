@@ -1,12 +1,16 @@
 PROJECT_ROOT_DIR=/root/lxf/se
-BASE_COMPLIE_FILES=$(PROJECT_ROOT_DIR)/base/time_stamp.cc
-COMPLIE_OPTION= -Wall -Werror -lpthread
+BASE_DIR=$(PROJECT_ROOT_DIR)/base
+NET_DIR=$(PROJECT_ROOT_DIR)net
+COMPLIE_OPTION= -I $(PROJECT_ROOT_DIR) -Wall -Werror -lpthread -g
 
 singleton:
-	g++ test_singleton.cc $(BASE_COMPLIE_FILES) -g -o test_singleton.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION)
+	g++ test_singleton.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) -o test_singleton.out
 
 regex:
-	g++ test_regex.cc $(PROJECT_ROOT_DIR)/base/regex.cc $(BASE_COMPLIE_FILES) -g -o test_regex.out -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -lboost_regex
+	g++ test_regex.cc $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) -lboost_regex -o test_regex.out
+
+md5:
+	g++ test_md5.cc $(BASE_DIR)/time_stamp.cc $(BASE_DIR)/md5.cc $(COMPLIE_OPTION) -lcrypto -o test_md5.out
 
 clean:
 	rm *.out

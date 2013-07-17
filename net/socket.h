@@ -21,20 +21,20 @@
 #include    <unistd.h>
 namespace net
 {
-class SockAddr;
-enum SocketStatus
-{
-    INIT,
-    CONNECTED,
-    INVALID
-};
+    class SockAddr;
+    enum SocketStatus
+    {
+        INIT,
+        CONNECTED,
+        INVALID
+    };
 
     class Socket
     {
         public:
             Socket();
             ~Socket();
-//            explicit Socket(int sockfd):sockfd_(sockfd){}
+            //            explicit Socket(int sockfd):sockfd_(sockfd){}
             SocketStatus Status() const { return sock_st_;}
             bool Connect(const SockAddr &server_addr);
             ssize_t Read(void *buf, size_t count);

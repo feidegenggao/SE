@@ -23,15 +23,23 @@
 using namespace base;
 using namespace net;
 
-int main()
+int main(int argc, char *argv[])
 {
-    Url url_temp("http://www.uestc.edu.cn/");
+    if (argc != 2)
+    {
+        LOG_ERROR << "Usage:" << argv[0] << "url_want_to_visit";
+        LOG_END;
+        return -1;
+    }
+    //Url url_temp("http://www.uestc.edu.cn/");
+    //Url url_temp("http://gr.uestc.edu.cn/index.shtml");
+    Url url_temp(argv[1]);
     UrlSet url_set_temp;
     Page page_temp(url_temp);
 
     page_temp.VisitUrl();
     page_temp.GetUnvisitedUrl(url_set_temp);
 
-    LOG_DEBUG << "end\n";
+    LOG_END;
     return 0;
 }
