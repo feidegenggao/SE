@@ -17,18 +17,32 @@
  */
 #ifndef     BASE_SOCKET_HEADER
 #define     BASE_SOCKET_HEADER
-#include    "socket_addr.h"
 
+#include    <unistd.h>
 namespace net
 {
+class SockAddr;
+enum SocketStatus
+{
+    INIT,
+    CONNECTED,
+    INVALID
+};
+
     class Socket
     {
         public:
             Socket();
-            Socket(int domain, int type, int protocol);
+            ~Socket();
+//            explicit Socket(int sockfd):sockfd_(sockfd){}
+            SocketStatus Status() const { return sock_st_;}
+            bool Connect(const SockAddr &server_addr);
+            ssize_t Read(void *buf, size_t count);
+            ssize_t Write(const void *buf, size_t count);
 
         private:
-            int sockfd_;
+            /* const  */int sockfd_;
+            SocketStatus sock_st_;
     };
 }
 #endif

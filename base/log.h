@@ -45,6 +45,7 @@ namespace base
 #define     LOG_INFO    cerr << "\n" << Info() << "  [INFO]  "COMMON_INFO
 #define     LOG_WARN    cerr << "\n" << Info() << "  [WARN]  "COMMON_INFO
 #define     LOG_ERROR     cerr << "\n" << Info() << "  [ERROR]  "COMMON_INFO
+#define     LOG_END     cerr <<"\n"
 
 }
 
