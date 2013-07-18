@@ -28,5 +28,7 @@ class Page
 
     private:
             Url url_;
+            string http_header_;
+            string html_data_;
 };
 #endif

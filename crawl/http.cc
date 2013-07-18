@@ -25,7 +25,7 @@ using namespace net;
 
 #include    <string.h>
 
-bool GetPage(const Url &server_url, string &http_header, string &http_data)
+bool GetPage(const Url &server_url, string &http_header, string &html_data)
 {
     Socket client_socket;
     if (!client_socket.Connect(server_url.GetSockAddr())) return false;
@@ -54,23 +54,37 @@ bool GetPage(const Url &server_url, string &http_header, string &http_data)
     int read_n = 0;
     int read_sum = 0;
 
-    string  dst_string("HTTP/1.1 200 OK");
-    read_n = client_socket.Read(read_buf, dst_string.length());
-    LOG_DEBUG << "read from server :" << read_n;
-    string result_string(read_buf);
-    //FIXME:
-    //Currently, we only receive the 200 OK datagram
-    string regex_string("HTTP/1.[0 1]{1} 200 OK");
-    if (!RegexMatch(result_string, regex_string)) return false;
-
+    string http_data;//inclue http_header \r\n and html_data 
     do
     {
         memset(read_buf, 0, sizeof(read_buf));
-        read_n = client_socket.Read(read_buf, sizeof(read_buf));
+        read_n = client_socket.Read(read_buf, sizeof(read_buf) - 1);
+        read_buf[sizeof(read_buf) - 1] = '\0';
+
         read_sum += read_n;
-        LOG_DEBUG << "read from server :" << read_n;
-        LOG_DEBUG << read_buf;
+        http_data += read_buf;
     }while(read_n != 0);
-    LOG_DEBUG << "read sum:" << read_sum;
+
+    //find the "\r\n\r\n" 's position this position is
+    //the separator between http_header and html_data
+    const size_t separator_opsition = http_data.find("\r\n\r\n");
+    if (separator_opsition == string::npos)
+    {
+        //can't find \r\n\r\n, we can make assertion that this http_data is invalid
+        return false;
+    }
+
+    http_header = string(http_data, 0, separator_opsition);
+    string regex("^HTTP/1.[0 1]{1} 200 OK.*");
+    if (RegexMatch(http_header, regex))
+    {
+        //LOG_DEBUG << "This HTTP header match 200 OK";
+    }
+    else
+    {
+        return false;
+    }
+    html_data = string(http_data, separator_opsition + 4);
+
     return true;
 }
