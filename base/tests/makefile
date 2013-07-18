@@ -12,5 +12,8 @@ regex:
 md5:
 	g++ test_md5.cc $(BASE_DIR)/time_stamp.cc $(BASE_DIR)/md5.cc $(COMPLIE_OPTION) -lcrypto -o test_md5.out
 
+tools:
+	g++ test_tools.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) -o test_tools.out
+
 clean:
 	rm *.out

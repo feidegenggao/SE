@@ -38,11 +38,11 @@ void PrintSearchResult(const RegexSearchResultType &result)
     for (RegexSearchResultConstItor it = result.begin();
             it != result.end(); it++)
     {
-        cout << "it:" << *it << endl;
+        LOG_INFO << "it:" << *it << endl;
         return;
     }
 
-    cout << "result is null" << endl;
+    LOG_INFO << "result is null" << endl;
 
 }
 
@@ -56,21 +56,29 @@ int main(int argc, char *argv[])
     string regex("http://.*/?");
     string regex2("http://www..*.com");
     string regex3("http:.*/{1,3}");
+    string regex4(".*<a.*href=\"([^\"]*)\".*>.*</a>.*");
     string dst_text("http://www.taobao.com");
     string dst_text_2("http://ww.taobao.com");
     string dst_text_3("http://www.uestc.edu.cn/");
+    string dst_text_4("                            <td height=\"20\">&nbsp;&nbsp;<img src=\"images/icon_3.jpg\" width=\"3\" height=\"3\" />&nbsp;<span class=\"STYLE1\"><a href=\"http://www.jwc.uestc.edu.cn\" target=\"_blank\">普通本科教学管理（教务处）</a></span></td>" );
 
     CheckIt(dst_text, regex);
     CheckIt(dst_text_2, regex2);
     CheckIt(dst_text_3, regex3);
+    CheckIt(dst_text_4, regex4);
 
     string search_regex("http://([^/]*)/?");
     string search_str("http://www.uestc.edu.cn/");
     RegexSearchResultType result;
+
     RegexSearch(search_str, search_regex, result);
     PrintSearchResult(result);
 
+    result.clear();
+    RegexSearch(dst_text_4, regex4, result);
+    PrintSearchResult(result);
 
-    LOG_INFO << "\n";
+
+    LOG_END;
     return 0;
 }

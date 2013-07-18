@@ -40,11 +40,14 @@ class Url
         string GetNode() const { return node_;}
         bool IfValid() const { return (if_vaild_ and (url_scheme_ == SCHEME_HTTP));}
         const SockAddr& GetSockAddr() const { return sockaddr_;}
-
+        static const string UrlRegexStr;
     private:
         string str_url_;
         void Analysis();
         void Resolved();
+        //true:can access
+        //false:can't access
+        bool Filter(const string &url);
 
         UrlScheme url_scheme_;
         string node_;
@@ -54,6 +57,7 @@ class Url
         //the first sockaddr in AddrSet
         SockAddr sockaddr_;
 };
+
 
 inline bool operator == (const Url &left, const Url &right)
 {

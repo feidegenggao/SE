@@ -9,3 +9,6 @@ all:
 
 clean:
 	rm crawl.out
+
+rawclean:
+	rm *.raw

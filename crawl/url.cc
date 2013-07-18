@@ -23,27 +23,32 @@
 
 using namespace base;
 
+const string Url::UrlRegexStr = string("http://[^/]*/?.*");
+
 Url::Url(string url):str_url_(url)
 {
     url_scheme_ = SCHEME_INVALID;
     if_vaild_ = false;
-    Analysis();
-    if (url_scheme_ == SCHEME_HTTP)
+
+    if (IfFilter(url))
     {
-        Resolved();
+        Analysis();
+        if (url_scheme_ == SCHEME_HTTP)
+        {
+            Resolved();
+        }
     }
 }
 
 void Url::Analysis()
 {
     //Currently, we only crwal http protocol
-    string src_regex("http://[^/]*/?.*");
-    if (RegexMatch(str_url_, src_regex))
+    if (RegexMatch(str_url_, UrlRegexStr))
     {
         url_scheme_ = SCHEME_HTTP;
         services_ = string("http");
 
-        string search_node_regex("http://([^/]*)/?");
+        string search_node_regex("http://([^/]*)/.*");
         RegexSearchResultType result;
         RegexSearch(str_url_, search_node_regex, result);
         node_ = *result.begin();
@@ -63,12 +68,17 @@ void Url::Resolved()
     if (rt == SUCCESSFUL)
     {
         /*
-        LOG_DEBUG << "node:" << node_;
-        LOG_DEBUG << "services_:" << services_;
-        LOG_DEBUG << "source_url_:" << source_url_;
-        LOG_DEBUG << "ip:" << sockaddr_.IPStr();
-        LOG_DEBUG  << "port:" << sockaddr_.PortStr();
-        */
+           LOG_DEBUG << "node:" << node_;
+           LOG_DEBUG << "services_:" << services_;
+           LOG_DEBUG << "source_url_:" << source_url_;
+           LOG_DEBUG << "ip:" << sockaddr_.IPStr();
+           LOG_DEBUG  << "port:" << sockaddr_.PortStr();
+           */
         if_vaild_ = true;
     }
+}
+
+bool Url::IfFilter(const string &url)
+{
+    return true;
 }

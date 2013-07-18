@@ -30,5 +30,7 @@ class Page
             Url url_;
             string http_header_;
             string html_data_;
+            static int OpenRawFile();
+            static int raw_file_fd_;
 };
 #endif

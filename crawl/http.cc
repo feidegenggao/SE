@@ -28,7 +28,11 @@ using namespace net;
 bool GetPage(const Url &server_url, string &http_header, string &html_data)
 {
     Socket client_socket;
-    if (!client_socket.Connect(server_url.GetSockAddr())) return false;
+    if (!client_socket.Connect(server_url.GetSockAddr())) 
+    {
+        LOG_ERROR << "Can't connect url:" << server_url.Str();
+        return false;
+    }
 
     //Group the HTTP header that will send to HTTP-Server
     //Get
@@ -71,6 +75,7 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     if (separator_opsition == string::npos)
     {
         //can't find \r\n\r\n, we can make assertion that this http_data is invalid
+        LOG_ERROR << "Receive data NOT include \\r\\n\\r\\n ";
         return false;
     }
 
@@ -82,6 +87,7 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     }
     else
     {
+        LOG_ERROR << "HTTP Server return Error Code";
         return false;
     }
     html_data = string(http_data, separator_opsition + 4);
