@@ -22,9 +22,11 @@ GetSockAddr	url.h	/^        const SockAddr& GetSockAddr() const { return sockadd
 GetSourceDataUrl	url.h	/^        string GetSourceDataUrl() const { return source_url_;}$/;"	f	class:Url
 GetUnvisitedUrl	page.cc	/^void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)$/;"	f	class:Page
 HTTP_HEADER	http.h	19;"	d
+IfFilter	url.cc	/^bool Url::IfFilter(const string &url)$/;"	f	class:Url
 IfValid	url.h	/^        bool IfValid() const { return (if_vaild_ and (url_scheme_ == SCHEME_HTTP));}$/;"	f	class:Url
 NET_DIR	makefile	/^NET_DIR=$(PROJECT_ROOT_DIR)\/net$/;"	m
 NET_DIR	tests/makefile	/^NET_DIR=$(PROJECT_ROOT_DIR)\/net$/;"	m
+OpenRawFile	page.cc	/^int Page::OpenRawFile()$/;"	f	class:Page
 PAGE_HEADER	page.h	19;"	d
 PROJECT_ROOT_DIR	makefile	/^PROJECT_ROOT_DIR=\/root\/lxf\/se$/;"	m
 PROJECT_ROOT_DIR	tests/makefile	/^PROJECT_ROOT_DIR=\/root\/lxf\/se$/;"	m
@@ -44,6 +46,8 @@ TYPES_HEADER	types.h	19;"	d
 URL_HEADER	url.h	19;"	d
 Url	url.cc	/^Url::Url(string url):str_url_(url)$/;"	f	class:Url
 Url	url.h	/^class Url$/;"	c
+UrlRegexStr	url.cc	/^const string Url::UrlRegexStr = string("http:\/\/[^\/]*\/?.*");$/;"	m	class:Url	file:
+UrlRegexStr	url.h	/^        static const string UrlRegexStr;$/;"	m	class:Url
 UrlScheme	url.h	/^enum UrlScheme$/;"	g
 UrlSet	types.h	/^typedef set<Url> UrlSet;$/;"	t
 UrlSetIt	types.h	/^typedef UrlSet::iterator UrlSetIt;$/;"	t
@@ -63,6 +67,8 @@ node_	url.h	/^        string node_;$/;"	m	class:Url
 operator <	url.h	/^inline bool operator < (const Url &left, const Url &right)$/;"	f
 operator <<	url.h	/^inline ostream& operator << (ostream &out, const Url &url)$/;"	f
 operator ==	url.h	/^inline bool operator == (const Url &left, const Url &right)$/;"	f
+raw_file_fd_	page.cc	/^int Page::raw_file_fd_ = OpenRawFile();$/;"	m	class:Page	file:
+raw_file_fd_	page.h	/^            static int raw_file_fd_;$/;"	m	class:Page
 services_	url.h	/^        string services_;$/;"	m	class:Url
 sockaddr_	url.h	/^        SockAddr sockaddr_;$/;"	m	class:Url
 source_url_	url.h	/^        string source_url_;$/;"	m	class:Url

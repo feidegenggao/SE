@@ -23,7 +23,7 @@
 
 using namespace base;
 
-const string Url::UrlRegexStr = string("http://[^/]*/?.*");
+const string Url::UrlRegexStr = string("^http://([^/]+)(/.*$|$)");
 
 Url::Url(string url):str_url_(url)
 {
@@ -39,24 +39,29 @@ Url::Url(string url):str_url_(url)
         }
     }
 }
+bool Url::IsHttpUrl(const string &url)
+{
+    return RegexMatch(url, UrlRegexStr);
+}
 
 void Url::Analysis()
 {
     //Currently, we only crwal http protocol
-    if (RegexMatch(str_url_, UrlRegexStr))
+    if (IsHttpUrl(str_url_))
     {
         url_scheme_ = SCHEME_HTTP;
         services_ = string("http");
 
-        string search_node_regex("http://([^/]*)/.*");
         RegexSearchResultType result;
-        RegexSearch(str_url_, search_node_regex, result);
-        node_ = *result.begin();
-
-        string search_sourceurl_regex("http://[^/]*(/.*)");
-        result.clear();
-        RegexSearch(str_url_, search_sourceurl_regex, result);
-        source_url_ = *result.begin();
+        RegexSearch(str_url_, UrlRegexStr, result);
+        if (result.size() > 0)
+        {
+            node_ = *result.begin();
+        }
+        if (result.size() > 1)
+        {
+            source_url_ = *(++result.begin());
+        }
     }
 }
 
@@ -67,7 +72,7 @@ void Url::Resolved()
     int rt = addrset_.GetSockAddr(sockaddr_);
     if (rt == SUCCESSFUL)
     {
-        /*
+        /*  
            LOG_DEBUG << "node:" << node_;
            LOG_DEBUG << "services_:" << services_;
            LOG_DEBUG << "source_url_:" << source_url_;
@@ -80,5 +85,6 @@ void Url::Resolved()
 
 bool Url::IfFilter(const string &url)
 {
-    return true;
+    string dst_url_regex("^http://[^/]+\\.uestc.edu.cn(/.*|$)");
+    return RegexMatch(url, dst_url_regex);
 }

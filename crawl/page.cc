@@ -83,15 +83,24 @@ void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
         RegexSearch(html_temp_line, find_url_regex, result);
         if (result.size() > 0)
         {
-            string url_temp_str = *result.begin();
-            LOG_DEBUG << "url_temp_str:" << url_temp_str;
+            string url_get_from_html  = *result.begin();
+            if ( Url::IsHttpUrl(url_get_from_html))
+            {
+                LOG_DEBUG << "url_get_from_html:" << url_get_from_html;
+            }
+            else
+            {
+                string url_temp_str("http://");
+                url_temp_str = url_temp_str + url_.GetNode() + "/" + url_get_from_html;
+                url_get_from_html = url_temp_str;
+
+                LOG_DEBUG << "url_get_from_html:" << url_get_from_html;
+            }
+
+            Url url_temp(url_get_from_html);
+            unvisited_sites.insert(url_temp);
         }
     }
-    //Analysis end
-
-    Url url_temp("http://gr.uestc.edu.cn/admin");
-    unvisited_sites.insert(url_temp);
-    LOG_DEBUG << "get unvisited url";
 }
 
 int Page::raw_file_fd_ = OpenRawFile();
@@ -115,9 +124,8 @@ int Page::OpenRawFile()
     return fd;
 }
 /*
-   raw file was consited of one or more RawSegments. 
-   Every RawSegment consists of the follwring parts
-
+//   raw file was consited of one or more RawSegments. 
+//   Every RawSegment consists of the follwring parts
 //START
 //raw_header_length: length of RawHeader 
 //NOT INCLUDE segment of raw_header_length:num_a 's length

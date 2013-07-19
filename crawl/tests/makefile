@@ -9,7 +9,7 @@ dns:
 	g++ $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/dns.cc test_dns.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_dns.out 
 
 url:
-	g++ $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/url.cc $(CRAWL_DIR)/dns.cc test_url.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_url.out
+	g++ $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(CRAWL_DIR)/url.cc $(CRAWL_DIR)/dns.cc test_url.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_url.out -lboost_regex
 
 page:
 	g++ $(BASE_DIR)/regex.cc $(BASE_DIR)/time_stamp.cc $(NET_DIR)/sock_addr.cc $(NET_DIR)/socket.cc $(CRAWL_DIR)/dns.cc $(CRAWL_DIR)/page.cc $(CRAWL_DIR)/url.cc $(CRAWL_DIR)/http.cc test_page.cc -I $(PROJECT_ROOT_DIR) $(COMPLIE_OPTION) -g -o test_page.out -lboost_regex

@@ -20,6 +20,7 @@
 int main()
 {
     Url url_edu("http://www.uestc.edu.cn");
+    Url url_edu2("http://www.jwc.uestc.edu.cn");
 
     return 0;
 }

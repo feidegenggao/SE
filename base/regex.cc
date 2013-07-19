@@ -38,8 +38,8 @@ bool base::RegexSearch(const string &s, const string &regex, RegexSearchResultTy
         {
             string temp(search_result[i]);
             result.push_back(temp);
-            return true;
         }
+        return true;
     }
 
     return false;
