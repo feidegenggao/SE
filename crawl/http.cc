@@ -87,7 +87,16 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     }
     else
     {
-        LOG_ERROR << "HTTP Server return Error Code";
+        LOG_ERROR << "HTTP Server(url:" << server_url.Str() << "\tError Info:";
+
+        string regex_find_code("^HTTP/1\\.[0-1]{1} (\\d{1,3}[^\\r\\n]*).*");
+        RegexSearchResultType result;
+        RegexSearch(http_header, regex_find_code, result);
+        if (result.size() > 0)
+        {
+            LOG_ERROR << *result.begin();
+        }
+
         return false;
     }
     html_data = string(http_data, separator_opsition + 4);

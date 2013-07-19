@@ -84,6 +84,14 @@ int main(int argc, char *argv[])
     RegexSearch("http://www.uestc.edu.cn/", "^http://([^/]+)(/.*|$)", result);
     PrintSearchResult(result);
 
+    string http_header("HTTP/1.0 400 Bad Request\r\nsecond line\r\nthired line");
+    string regex_find_code("^HTTP/1\\.[0-1]{1} (\\d{1,3}[^\\r\\n]*).*");
+    RegexSearch(http_header, regex_find_code, result);
+    PrintSearchResult(result);
+
+
+
+
 
     LOG_END;
     return 0;

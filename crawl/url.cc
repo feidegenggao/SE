@@ -39,6 +39,7 @@ Url::Url(string url):str_url_(url)
         }
     }
 }
+
 bool Url::IsHttpUrl(const string &url)
 {
     return RegexMatch(url, UrlRegexStr);
@@ -61,6 +62,10 @@ void Url::Analysis()
         if (result.size() > 1)
         {
             source_url_ = *(++result.begin());
+        }
+        if (source_url_.length() == 0)
+        {
+            source_url_ = string("/");
         }
     }
 }

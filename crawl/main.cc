@@ -27,7 +27,7 @@
 using namespace std;
 using namespace base;
 
-const int g_k_n_search_deepth = 5;
+const int g_k_n_search_deepth = 4;
 
 void GetSiteSeed(UrlSet &sites_seeds, const string &file_name);
 int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sites);
@@ -98,11 +98,15 @@ int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sit
 
     Page cur_page(url);
     //get data from the url
+    LOG_DEBUG << "Start visit :" << url.Str();
     cur_page.VisitUrl();
+    LOG_DEBUG << "Finish visit " << url.Str();
     //analysis the hyperlink from the data that get from the url
     //and then insert into unvisited_sites
     //if no data ( we can't connect to the url) we will insert nothing into
     //unvisited_sites
+    LOG_DEBUG << "Start get unvisit url from html of " << url.Str();
     cur_page.GetUnvisitedUrl(unvisited_sites);
+    LOG_DEBUG << "Finish get unvisit url from html of " << url.Str();
     return SUCCESSFUL;
 }

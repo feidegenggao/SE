@@ -36,11 +36,13 @@ Page::Page(const Url &url):url_(url)
 void Page::VisitUrl()
 {
     if (!url_.IfValid()) return;
+    LOG_DEBUG << "Start GetPage:" << url_.Str();
     if (!GetPage(url_, http_header_, html_data_))
     {
-        LOG_ERROR << "GetPage failed";
+        LOG_ERROR << "GetPage failed, url:" << url_.Str();
         return;
     }
+    LOG_DEBUG << "Finish GetPage:" << url_.Str();
 
     const string raw_data = html_data_;
     string raw_header("version:0.1");
@@ -64,6 +66,9 @@ void Page::VisitUrl()
 
     //RawData
     write(raw_file_fd_, raw_data.c_str(), raw_data.length());
+
+    static int visited_url_num = 0;
+    LOG_DEBUG << "Visited [" << visited_url_num++ << "] url:" << url_.Str();
 }
 
 void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
@@ -76,8 +81,10 @@ void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
     stringstream html_stream;
     html_stream << html_data_;
     string html_temp_line;
+    LOG_DEBUG << "Next to get url from :" << url_.Str();
     while(getline(html_stream, html_temp_line))
     {
+        if (html_temp_line.length() == 0) continue;
         string find_url_regex(".*<a.*href=\"([^\"]*)\".*>.*</a>.*");
         RegexSearchResultType result;
         RegexSearch(html_temp_line, find_url_regex, result);
@@ -99,8 +106,10 @@ void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
 
             Url url_temp(url_get_from_html);
             unvisited_sites.insert(url_temp);
+            LOG_DEBUG << "Insert to unvisited_sites ";
         }
     }
+    LOG_DEBUG << "Finished get url from :" << url_.Str();
 }
 
 int Page::raw_file_fd_ = OpenRawFile();

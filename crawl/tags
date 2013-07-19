@@ -24,6 +24,7 @@ GetUnvisitedUrl	page.cc	/^void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)$/;
 HTTP_HEADER	http.h	19;"	d
 IfFilter	url.cc	/^bool Url::IfFilter(const string &url)$/;"	f	class:Url
 IfValid	url.h	/^        bool IfValid() const { return (if_vaild_ and (url_scheme_ == SCHEME_HTTP));}$/;"	f	class:Url
+IsHttpUrl	url.cc	/^bool Url::IsHttpUrl(const string &url)$/;"	f	class:Url
 NET_DIR	makefile	/^NET_DIR=$(PROJECT_ROOT_DIR)\/net$/;"	m
 NET_DIR	tests/makefile	/^NET_DIR=$(PROJECT_ROOT_DIR)\/net$/;"	m
 OpenRawFile	page.cc	/^int Page::OpenRawFile()$/;"	f	class:Page
@@ -46,7 +47,7 @@ TYPES_HEADER	types.h	19;"	d
 URL_HEADER	url.h	19;"	d
 Url	url.cc	/^Url::Url(string url):str_url_(url)$/;"	f	class:Url
 Url	url.h	/^class Url$/;"	c
-UrlRegexStr	url.cc	/^const string Url::UrlRegexStr = string("http:\/\/[^\/]*\/?.*");$/;"	m	class:Url	file:
+UrlRegexStr	url.cc	/^const string Url::UrlRegexStr = string("^http:\/\/([^\/]+)(\/.*$|$)");$/;"	m	class:Url	file:
 UrlRegexStr	url.h	/^        static const string UrlRegexStr;$/;"	m	class:Url
 UrlScheme	url.h	/^enum UrlScheme$/;"	g
 UrlSet	types.h	/^typedef set<Url> UrlSet;$/;"	t
@@ -54,7 +55,7 @@ UrlSetIt	types.h	/^typedef UrlSet::iterator UrlSetIt;$/;"	t
 VisitUrl	page.cc	/^void Page::VisitUrl()$/;"	f	class:Page
 addrinfo_	dns.h	/^        struct addrinfo *addrinfo_;$/;"	m	class:AddrSet	typeref:struct:AddrSet::addrinfo
 current_pointer_to_addrinfo_	dns.h	/^        struct addrinfo *current_pointer_to_addrinfo_;$/;"	m	class:AddrSet	typeref:struct:AddrSet::addrinfo
-g_k_n_search_deepth	main.cc	/^const int g_k_n_search_deepth = 5;$/;"	v
+g_k_n_search_deepth	main.cc	/^const int g_k_n_search_deepth = 4;$/;"	v
 html_data_	page.h	/^            string html_data_;$/;"	m	class:Page
 http_header_	page.h	/^            string http_header_;$/;"	m	class:Page
 if_vaild_	url.h	/^        bool if_vaild_;$/;"	m	class:Url
