@@ -35,11 +35,15 @@
  *
  * ============================================================================
  */
+#include    "base/md5.h"
 #include    "base/log.h"
 #include    "base/types.h"
+#include    "index.h"
 #include    <assert.h>
 using namespace base;
 
+bool GetRawDataAndUrl(string &raw_data, string &url);
+off_t GetRawFileOffset();
 int main()
 {
     string raw_file_name("");
@@ -47,8 +51,32 @@ int main()
     int raw_file_fd = open(raw_file_name.c_str(), O_RDONLY);
     assert(raw_file_fd != -1);
 
+    unsigned int doc_id = 0;
+    while(true)
+    {
+        string raw_data;
+        string url;
+        off_t current_offset = GetRawFileOffset();
+        if (!GetRawDataAndUrl(raw_data, url)) break;
 
+        Index::WriteToDocIndex(doc_id, current_offset, MD5(raw_data));
+        Index::WriteToUrlIndex(MD5(url), doc_id);
+
+        doc_id++;
+    };
+
+    Index::WriteToDocIndex(doc_id, GetRawFileOffset());
 
     LOG_END;
     return SUCCESSFUL;
+}
+
+bool GetRawDataAndUrl(string &raw_data, string &url)
+{
+
+}
+
+off_t GetRawFileOffset()
+{
+
 }
