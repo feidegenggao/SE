@@ -35,7 +35,11 @@ Page::Page(const Url &url):url_(url)
 
 void Page::VisitUrl()
 {
-    if (!url_.IfValid()) return;
+    if (!url_.IfValid())
+    {
+        LOG_DEBUG << "url:" << url_.Str() << " is invalid";
+        return;
+    }
     LOG_DEBUG << "Start GetPage:" << url_.Str();
     if (!GetPage(url_, http_header_, html_data_))
     {
@@ -53,19 +57,19 @@ void Page::VisitUrl()
 
     //raw_header_length:raw_header.length()
     string raw_header_length("raw_header_length:");
-    raw_header_length += Convert<string, size_t>(raw_header.length());
-    write(raw_file_fd_, raw_header_length.c_str(), raw_header_length.length());
+    raw_header_length = raw_header_length + Convert<string, size_t>(raw_header.length()) + ' ';
+    WriteToRawFile(raw_header_length.c_str(), raw_header_length.length());
 
     //RawHeader
-    write(raw_file_fd_, raw_header.c_str(), raw_header.length());
+    WriteToRawFile(raw_header.c_str(), raw_header.length());
 
     //raw_data_length:raw_data.length()
     string raw_data_length("raw_data_length:");
     raw_data_length += Convert<string, size_t>(raw_data.length());
-    write(raw_file_fd_, raw_data_length.c_str(), raw_data_length.length());
+    WriteToRawFile(raw_data_length.c_str(), raw_data_length.length());
 
     //RawData
-    write(raw_file_fd_, raw_data.c_str(), raw_data.length());
+    WriteToRawFile(raw_data.c_str(), raw_data.length());
 
     static int visited_url_num = 0;
     LOG_DEBUG << "Visited [" << visited_url_num++ << "] url:" << url_.Str();
@@ -73,7 +77,11 @@ void Page::VisitUrl()
 
 void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
 {
-    if (!url_.IfValid()) return;
+    if (!url_.IfValid())
+    {
+        LOG_DEBUG << "url:" << url_.Str() << " is invalid";
+        return;
+    }
     if (http_header_.length() == 0 or html_data_.length() == 0) return;
 
     //Analysis the html_data to get url that not visited
@@ -132,13 +140,19 @@ int Page::OpenRawFile()
 
     return fd;
 }
+
+void Page::WriteToRawFile(const void *buf, size_t count)
+{
+    write(raw_file_fd_, (const void*)buf, count);
+}
+
 /*
 //   raw file was consited of one or more RawSegments. 
 //   Every RawSegment consists of the follwring parts
 //START
 //raw_header_length: length of RawHeader 
 //NOT INCLUDE segment of raw_header_length:num_a 's length
-raw_header_length:num_a
+raw_header_length:num_a(THERE IS A SPACE)
 RawHeader
 //raw_header_length: length of RawData
 //NOT INCLUDE segment of raw_data_length:num_b 's length

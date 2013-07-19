@@ -32,5 +32,6 @@ class Page
             string html_data_;
             static int OpenRawFile();
             static int raw_file_fd_;
+            static void WriteToRawFile(const void *buf, size_t count);
 };
 #endif
