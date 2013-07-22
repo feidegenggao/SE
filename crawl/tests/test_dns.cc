@@ -60,6 +60,8 @@ void PrintAddrInfo(SockAddr result)
 
 int main(int argc, char *argv[])
 {
+    //test this url: http://www.tzb.uestc.edu.cn
+    //http://epaper.uestc.edu.cn
     LOG_DEBUG << "Start...";
     if (argc != 2)
     {

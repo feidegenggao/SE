@@ -1,0 +1,14 @@
+PROJECT_ROOT=/root/lxf/se
+BASE_DIR=$(PROJECT_ROOT)/base
+NET_DIR=$(PROJECT_ROOT)/net
+COMPLIE_OPTION= -g -Wall -Werror -I$(PROJECT_ROOT) 
+COMPLIE_LIB= -lpthread -lcrypto -lboost_regex 
+
+all:
+	g++ $(BASE_DIR)/time_stamp.cc $(BASE_DIR)/md5.cc $(BASE_DIR)/regex.cc main.cc index.cc $(COMPLIE_OPTION) $(COMPLIE_LIB) -o index.out
+
+outclean:
+	rm *.out
+
+indexclean:
+	rm *.index

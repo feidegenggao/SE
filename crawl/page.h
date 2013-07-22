@@ -18,6 +18,7 @@
 #ifndef     PAGE_HEADER
 #define     PAGE_HEADER
 #include    "types.h"
+extern const int g_k_n_search_deepth;
 class Url;
 class Page
 {

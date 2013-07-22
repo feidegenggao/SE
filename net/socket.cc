@@ -60,6 +60,7 @@ bool Socket::Connect(const SockAddr &server_addr)
 ssize_t Socket::Read(void *buf, size_t count)
 {
     assert(sock_st_ == CONNECTED);
+    //set timer to read
     ssize_t read_n = read(sockfd_, buf, count);
     return read_n;
 }

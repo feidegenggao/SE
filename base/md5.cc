@@ -24,14 +24,14 @@ using namespace std;
 string base::MD5(const string &plain_text)
 {
     string result;
-    unsigned char md[17] = {0};
+    unsigned char md[16] = {0};
     ::MD5((const unsigned char *)plain_text.c_str(), plain_text.length(), md);
 
     char buf_temp[3] = {0};
-    for (size_t i = 0; i < strlen((const char*)md); i++)
+    for (size_t i = 0; i < 16; i++)
     {
         memset(buf_temp, 0, sizeof(buf_temp));
-        sprintf(buf_temp, "%x", md[i]);
+        sprintf(buf_temp, "%02x", md[i]);
         result += buf_temp;
     }
 

@@ -17,9 +17,14 @@
  */
 #include    "index.h"
 #include    "base/tools.h"
+using namespace std;
+using namespace base;
+#include    <assert.h>
+#include    <sys/stat.h>
+#include    <fcntl.h>
 
-int Index::doc_index_file_fd_ = OpenDocIndexFile("doc.index");
-int Index::url_index_file_fd_ = OpenUrlIndexFile("url.index");
+int Index::doc_index_file_fd_ = OpenFile("doc.index");
+int Index::url_index_file_fd_ = OpenFile("url.index");
 int Index::OpenFile(const string &filename)
 {
     int fd = open(filename.c_str(), O_CREAT | O_RDWR | O_TRUNC, S_IRUSR);
@@ -27,7 +32,7 @@ int Index::OpenFile(const string &filename)
     return fd;
 }
 
-void Index::WriteToIndex(unsigned int doc_id, off_t doc_offset, const string &doc_md5)
+void Index::WriteToDocIndex(unsigned int doc_id, off_t doc_offset, const string &doc_md5)
 {
     string write_str = Convert<string, unsigned int>(doc_id) + ' ' +
         Convert<string, off_t>(doc_offset) + ' ' + doc_md5 + '\n';
@@ -45,5 +50,5 @@ void Index::WriteToUrlIndex(const string &url_md5, unsigned int doc_id)
 
 int Index::Write(int file_fd, const void *write_buf, size_t count)
 {
-    write(file_fd, (const void *)write_buf, count);
+    return write(file_fd, (const void *)write_buf, count);
 }

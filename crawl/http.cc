@@ -63,6 +63,7 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     {
         memset(read_buf, 0, sizeof(read_buf));
         read_n = client_socket.Read(read_buf, sizeof(read_buf) - 1);
+        if (read_n < 0) return false;
         read_buf[sizeof(read_buf) - 1] = '\0';
 
         read_sum += read_n;

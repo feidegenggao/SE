@@ -63,11 +63,6 @@ void Page::VisitUrl()
     //RawHeader
     WriteToRawFile(raw_header.c_str(), raw_header.length());
 
-    //raw_data_length:raw_data.length()
-    string raw_data_length("raw_data_length:");
-    raw_data_length += Convert<string, size_t>(raw_data.length());
-    WriteToRawFile(raw_data_length.c_str(), raw_data_length.length());
-
     //RawData
     WriteToRawFile(raw_data.c_str(), raw_data.length());
 
@@ -123,14 +118,16 @@ void Page::GetUnvisitedUrl(UrlSet &unvisited_sites)
 int Page::raw_file_fd_ = OpenRawFile();
 int Page::OpenRawFile()
 {
-    string raw_file_name = Timestamp::now().toFormattedString();
+    string raw_file_name("doc_");/* = Timestamp::now().toFormattedString();
     size_t blank_opsition = raw_file_name.find(" ");
     while (blank_opsition != string::npos)
     {
         raw_file_name[blank_opsition] = '_';
         blank_opsition = raw_file_name.find(" ", blank_opsition + 1);
     }
+    */
 
+    raw_file_name +=  Convert<string, int>(g_k_n_search_deepth);
     raw_file_name += ".raw";
 
     LOG_DEBUG << "raw_file_name:" << raw_file_name;
@@ -154,9 +151,6 @@ void Page::WriteToRawFile(const void *buf, size_t count)
 //NOT INCLUDE segment of raw_header_length:num_a 's length
 raw_header_length:num_a(THERE IS A SPACE)
 RawHeader
-//raw_header_length: length of RawData
-//NOT INCLUDE segment of raw_data_length:num_b 's length
-raw_data_length:num_b
 RawData
 //END
 
@@ -172,6 +166,8 @@ url:http://www.uestc.edu.cn/index.html
 date:2013-07-18 15:46:49.146141
 //ip corresponding the url
 ip:202.112.14.184
+//raw_data_length: length of RawData
+raw_data_length:num_b
 //END
 
 NOTE:IN REALY RawHeader THERE IS NO '\n' EXISTS.
