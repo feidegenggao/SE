@@ -22,7 +22,7 @@ using namespace base;
 
 int main()
 {
-    if (Dict::GetInstance()->IsWord("啊"))
+    if (Dict::GetInstance()->IsWord("龙灯"))
     {
         LOG_DEBUG << "match ";
     }

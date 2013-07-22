@@ -45,14 +45,15 @@ void Dict::OpenDict()
     FILE *fp_dict = fopen(DICT_FILE_NAME.c_str(), "r");
     assert(fp_dict != NULL);
 
-    int id = 0;
+    //int id = 0;
     char word[50] = {0};
-    int freq = 0;
+    //int freq = 0;
 
-    while (fscanf(fp_dict, "%d %s %d", &id, word, &freq) != EOF)
+    //while (fscanf(fp_dict, "%d %s %d", &id, word, &freq) != EOF)
+    while (fscanf(fp_dict, "%s", word) != EOF)
     {
-        LOG_DEBUG << "Insert into dict:" << word;
-        dict_map_.insert(map<string, int>::value_type(word, freq));
+        //LOG_DEBUG << "Insert into dict:" << word;
+        dict_map_.insert(map<string, int>::value_type(word, 0));
         memset(word, 0, sizeof(word));
     }
 
