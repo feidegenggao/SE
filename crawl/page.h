@@ -34,5 +34,6 @@ class Page
             static int OpenRawFile();
             static int raw_file_fd_;
             static void WriteToRawFile(const void *buf, size_t count);
+            bool IfIncludeUTF8(const string &src_str);
 };
 #endif

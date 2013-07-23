@@ -22,7 +22,9 @@ using namespace base;
 
 int main()
 {
-    if (Dict::GetInstance()->IsWord("龙灯"))
+    string src_str("龙灯");
+    LOG_DEBUG << "src_str's length:" << src_str.length();
+    if (Dict::GetInstance()->IsWord(src_str))
     {
         LOG_DEBUG << "match ";
     }

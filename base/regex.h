@@ -23,6 +23,8 @@ using std::string;
 
 namespace base
 {
+    //FIXME:Add argument of RegexMatch that show the regex's option
+    //such as ignore case 
     typedef std::vector<string> RegexSearchResultType;
     typedef RegexSearchResultType::iterator RegexSearchResultItor;
     typedef RegexSearchResultType::const_iterator RegexSearchResultConstItor;

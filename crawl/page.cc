@@ -28,9 +28,29 @@ using namespace net;
 #include    <sys/types.h>
 #include    <sys/stat.h>
 #include    <fcntl.h>
+#include    <sstream>
+using namespace std;
 Page::Page(const Url &url):url_(url)
 {
 
+}
+
+bool Page::IfIncludeUTF8(const string &src_str)
+{
+    stringstream temp_stream;
+    temp_stream << src_str;
+    string temp_str_line;
+    string regex_utf_8_str("^Content-Type:.*charset[ ]?=[ ]?utf[-]?8.*$");
+    string regex_UTF_8_str("^Content-Type:.*charset[ ]?=[ ]?UTF[-]?8.*$");
+    while(getline(temp_stream, temp_str_line))
+    {
+        if (
+                RegexMatch(temp_str_line, regex_utf_8_str) or 
+                RegexMatch(temp_str_line, regex_UTF_8_str)
+           )
+            return true;
+    }
+    return false;
 }
 
 void Page::VisitUrl()
@@ -47,6 +67,19 @@ void Page::VisitUrl()
         return;
     }
     LOG_DEBUG << "Finish GetPage:" << url_.Str();
+
+    //http header NOT declare that use utf-8,
+    //we will not handle this page
+    if (!IfIncludeUTF8(http_header_))
+    {
+        //FIXME:
+        //We judge if html use utf-8 only use the http_header
+        //some pages maybe not include charset=utf-8 in http_header but 
+        //include in html
+        LOG_ERROR << "This page was not declare that use utf-8 , we will\
+            discard this page";
+        return;
+    }
 
     const string raw_data = html_data_;
     string raw_header("version:0.1");
