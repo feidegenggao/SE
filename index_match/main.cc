@@ -3,7 +3,8 @@
  *
  *       Filename:  main.cc
  *
- *    Description:  Create doc.index and url.index
+ *    Description:  
+ *    Create doc.index and url.index and forward.index and inverted.index
  *    [doc.index] 's  format:
  *    docId     docOffset       docMD5
  *    0         0               abcef1234567890e
@@ -20,6 +21,17 @@
  *    cbcef1234567890e  1
  *    ......
  *    bbcef1234567890e   28321
+ *
+ *    [forward.index]'s format:
+ *    docId1 key-word-1 key-word-2 ......
+ *    docId2 key-word-1 key-word-2 ......
+ *    docId3 key-word-2 ......
+ *    ......
+ *
+ *    [inverted.index]'s format:
+ *    key-word-1 docId1 docId2 ......
+ *    key-word-2 docId1 docId2 docId3 ......
+ *    ......
  *
  * NOTE:
  *    Every field was separte by ' '(space) and every line was terminated by '\n'
@@ -90,12 +102,10 @@ int main(int argc, char *argv[])
         off_t current_offset = GetRawFileOffset();
         if (!GetRawDataAndUrl(raw_data, url)) break;
 
-        LOG_DEBUG << "url" << url;
 
         Index::WriteToDocIndex(doc_id, current_offset, MD5(raw_data));
         Index::WriteToUrlIndex(MD5(url), doc_id);
-        LOG_DEBUG << "url:" << url;
-        LOG_DEBUG << "MD5:" << MD5(url);
+        Index::WriteToForwardIndex(raw_data);
 
         doc_id++;
     }

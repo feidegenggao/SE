@@ -16,15 +16,19 @@
  * ============================================================================
  */
 #include    "index.h"
+#include    "base/log.h"
 #include    "base/tools.h"
-using namespace std;
 using namespace base;
 #include    <assert.h>
 #include    <sys/stat.h>
 #include    <fcntl.h>
 
+#include    <sstream>
+using namespace std;
+
 int Index::doc_index_file_fd_ = OpenFile("doc.index");
 int Index::url_index_file_fd_ = OpenFile("url.index");
+int Index::forward_index_file_fd_ = OpenFile("foward.index");
 int Index::OpenFile(const string &filename)
 {
     int fd = open(filename.c_str(), O_CREAT | O_RDWR | O_TRUNC, S_IRUSR);
@@ -45,7 +49,22 @@ void Index::WriteToUrlIndex(const string &url_md5, unsigned int doc_id)
     string write_str = url_md5 + ' ' + Convert<string, unsigned int>(doc_id) + '\n';
 
     Write(url_index_file_fd_, write_str.c_str(), write_str.length());
+}
 
+void Index::WriteToForwardIndex(const string &html_data)
+{
+    stringstream temp_stream;
+    temp_stream << html_data;
+    string html_line;
+    //extract valid data from html
+    //remove html-lable and js and other invlid data for browser user
+    while (getline(temp_stream, html_line))
+    {
+        if (html_line.length() == 0) continue;
+        
+        if (html_line.length() > 0)
+            LOG_DEBUG << "html_line:" << html_line;
+    }
 }
 
 int Index::Write(int file_fd, const void *write_buf, size_t count)

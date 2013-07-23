@@ -29,10 +29,12 @@ class Index
         //If doc_md5 is null, we can guess that this is the end of doc.indx
         static void WriteToDocIndex(unsigned int doc_id, off_t doc_offset, const std::string &doc_md5 = std::string(""));
         static void WriteToUrlIndex(const std::string &url_md5, unsigned int doc_id);
+        static void WriteToForwardIndex(const std::string &html_data);
 
     private:
         static int doc_index_file_fd_;
         static int url_index_file_fd_;
+        static int forward_index_file_fd_;
         static int OpenFile(const std::string &filename);
         static int WriteDocIndex(const void *write_buf, size_t count);
         static int WriteUrlIndex(const void *write_buf, size_t count);
