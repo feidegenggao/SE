@@ -104,8 +104,8 @@ int main(int argc, char *argv[])
 
 
         Index::WriteToDocIndex(doc_id, current_offset, MD5(raw_data));
-        Index::WriteToUrlIndex(MD5(url), doc_id);
-        Index::WriteToForwardIndex(raw_data);
+        Index::WriteToUrlIndex(doc_id, MD5(url));
+        Index::WriteToForwardIndex(doc_id, raw_data);
 
         doc_id++;
     }

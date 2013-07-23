@@ -21,7 +21,7 @@
 #include    <string>
 #include    "base/singleton.h"
 
-const std::string DICT_FILE_NAME("/root/lxf/se/match/words.dict");
+const std::string DICT_FILE_NAME("/root/lxf/se/index_match/words.dict");
 class Dict : public base::Singleton<Dict>
 {
     public:

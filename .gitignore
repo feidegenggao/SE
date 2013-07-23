@@ -19,4 +19,4 @@
 *.raw
 *.index
 *.swp
-*.log
+*.temp

@@ -53,7 +53,7 @@ void Dict::OpenDict()
     while (fscanf(fp_dict, "%s", word) != EOF)
     {
         //LOG_DEBUG << "Insert into dict:" << word;
-        LOG_DEBUG << "word:" << word << "\tword's length:" << strlen(word);
+        //LOG_DEBUG << "word:" << word << "\tword's length:" << strlen(word);
         dict_map_.insert(map<string, int>::value_type(word, 0));
         memset(word, 0, sizeof(word));
     }
