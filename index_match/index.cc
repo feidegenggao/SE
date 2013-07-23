@@ -29,7 +29,7 @@ using namespace std;
 
 int Index::doc_index_file_fd_ = OpenFile("doc.index");
 int Index::url_index_file_fd_ = OpenFile("url.index");
-int Index::forward_index_file_fd_ = OpenFile("foward.index");
+int Index::forward_index_file_fd_ = OpenFile("forward.index");
 int Index::OpenFile(const string &filename)
 {
     int fd = open(filename.c_str(), O_CREAT | O_RDWR | O_TRUNC, S_IRUSR);
