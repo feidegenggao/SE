@@ -15,14 +15,14 @@
  *
  * ============================================================================
  */
-#include    "match/dict.h"
+#include    "index_match/dict.h"
 #include    "base/log.h"
 
 using namespace base;
 
 int main()
 {
-    string src_str("龙灯");
+    string src_str("电子科");
     LOG_DEBUG << "src_str's length:" << src_str.length();
     if (Dict::GetInstance()->IsWord(src_str))
     {

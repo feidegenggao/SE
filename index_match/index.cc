@@ -148,16 +148,14 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
 
         if (dst_str.length() != 0)
         {
-            LOG_DEBUG << "dst_str:" << dst_str;
-            LOG_DEBUG  << "length:" << dst_str.length();
             string only_chinese_str = RemoveNOChinese(dst_str);
             //participled_str instead of HanZi that have been participled
             string participled_str = Participle(only_chinese_str);
             forward_index_str += participled_str;
-            LOG_DEBUG << "only_chinese_str:" << only_chinese_str;
         }
     }
-    LOG_DEBUG << "forward_index_str:" << forward_index_str << "EOF";
+    forward_index_str += '\n';
+    Write(forward_index_file_fd_, forward_index_str.c_str(), forward_index_str.length());
 }
 
 int Index::Write(int file_fd, const void *write_buf, size_t count)

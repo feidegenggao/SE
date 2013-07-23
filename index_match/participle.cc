@@ -22,6 +22,7 @@ using namespace base;
 using namespace std;
 const unsigned int WORD_LEN = 3;//Every HanZi use 3 bytes to store(UTF-8)
 const unsigned int MAX_WORDS_LEN = 4;//The max length of sentence
+const string SEPARATOR(" ");
 
 int Min(int left, int right)
 {
@@ -41,14 +42,23 @@ string Participle(string src_str)
             //find it
             if (Dict::GetInstance()->IsWord(key_word))
             {
-                LOG_DEBUG << "key_word:" << key_word;
+                participled_str = participled_str + SEPARATOR + key_word;
+                break;
+            }
+            else
+            {
+                len -= WORD_LEN;
+            }
+
+            if (key_word.length() == WORD_LEN)
+            {
+                participled_str = participled_str + SEPARATOR + key_word;
+                if (len == 0) len = WORD_LEN;
                 break;
             }
             //not find it
-            else len -= WORD_LEN;
-        }while(key_word.length() != WORD_LEN);
+        }while(true);
 
-        LOG_DEBUG << "key_word:" << key_word;
 
         src_str.erase(0, len);
     }

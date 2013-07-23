@@ -5,7 +5,7 @@ COMPLIE_OPTION= -g -Wall -Werror -I$(PROJECT_ROOT)
 COMPLIE_LIB= -lpthread 
 
 dict:
-	g++ test_dict.cc $(PROJECT_ROOT)/match/dict.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) $(COMPLIE_LIB) -o test_dict.out
+	g++ test_dict.cc $(PROJECT_ROOT)/index_match/dict.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) $(COMPLIE_LIB) -o test_dict.out
 
 clean:
 	rm *.out
