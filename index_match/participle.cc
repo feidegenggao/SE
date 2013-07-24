@@ -18,6 +18,7 @@
 #include    "base/log.h"
 using namespace base;
 #include    "participle.h"
+#include    "inverted_map.h"
 #include    "dict.h"
 using namespace std;
 const unsigned int WORD_LEN = 3;//Every HanZi use 3 bytes to store(UTF-8)
@@ -29,7 +30,8 @@ int Min(int left, int right)
     return left < right ? left : right;
 }
 
-string Participle(string src_str)
+
+string Participle(unsigned int doc_id, string src_str)
 {
     string participled_str;
 
@@ -43,6 +45,7 @@ string Participle(string src_str)
             if (Dict::GetInstance()->IsWord(key_word))
             {
                 participled_str = participled_str + SEPARATOR + key_word;
+                InvertedMap::GetInstance()->Insert(key_word, doc_id);
                 break;
             }
             else
@@ -53,6 +56,7 @@ string Participle(string src_str)
             if (key_word.length() == WORD_LEN)
             {
                 participled_str = participled_str + SEPARATOR + key_word;
+                InvertedMap::GetInstance()->Insert(key_word, doc_id);
                 if (len == 0) len = WORD_LEN;
                 break;
             }

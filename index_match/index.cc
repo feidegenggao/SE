@@ -30,6 +30,8 @@ using namespace std;
 int Index::doc_index_file_fd_ = OpenFile("doc.index");
 int Index::url_index_file_fd_ = OpenFile("url.index");
 int Index::forward_index_file_fd_ = OpenFile("forward.index");
+int Index::inverted_index_file_fd_ = OpenFile("inverted.index");
+
 int Index::OpenFile(const string &filename)
 {
     int fd = open(filename.c_str(), O_CREAT | O_RDWR | O_TRUNC, S_IRUSR);
@@ -150,12 +152,17 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
         {
             string only_chinese_str = RemoveNOChinese(dst_str);
             //participled_str instead of HanZi that have been participled
-            string participled_str = Participle(only_chinese_str);
+            string participled_str = Participle(doc_id, only_chinese_str);
             forward_index_str += participled_str;
         }
     }
     forward_index_str += '\n';
     Write(forward_index_file_fd_, forward_index_str.c_str(), forward_index_str.length());
+}
+
+void Index::WriteToInvertedIndex(const std::string &data)
+{
+    Write(inverted_index_file_fd_, data.c_str(), data.length());
 }
 
 int Index::Write(int file_fd, const void *write_buf, size_t count)

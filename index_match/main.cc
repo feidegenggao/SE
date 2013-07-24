@@ -53,6 +53,7 @@
 #include    "base/regex.h"
 #include    "base/tools.h"
 #include    "index.h"
+#include    "inverted_map.h"
 #include    <assert.h>
 using namespace base;
 #include    <sys/types.h>
@@ -111,6 +112,7 @@ int main(int argc, char *argv[])
     }
 
     Index::WriteToDocIndex(doc_id, GetRawFileOffset());
+    InvertedMap::GetInstance()->WriteToFile();
 
     LOG_END;
     return SUCCESSFUL;

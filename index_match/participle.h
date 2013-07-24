@@ -21,5 +21,5 @@
 #define     PARTICIPLE_HEADER
 #include    <string>
 
-std::string Participle(std::string src_str);
+std::string Participle(unsigned int doc_id, std::string src_str);
 #endif

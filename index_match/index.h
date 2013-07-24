@@ -30,11 +30,13 @@ class Index
         static void WriteToDocIndex(const unsigned int doc_id, const off_t doc_offset, const std::string &doc_md5 = std::string(""));
         static void WriteToUrlIndex(const unsigned int doc_id, const std::string &url_md5);
         static void WriteToForwardIndex(const unsigned int doc_id, const std::string &html_data);
+        static void WriteToInvertedIndex(const std::string &data);
 
     private:
         static int doc_index_file_fd_;
         static int url_index_file_fd_;
         static int forward_index_file_fd_;
+        static int inverted_index_file_fd_;
         static int OpenFile(const std::string &filename);
         static int WriteDocIndex(const void *write_buf, size_t count);
         static int WriteUrlIndex(const void *write_buf, size_t count);
