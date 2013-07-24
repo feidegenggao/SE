@@ -19,27 +19,32 @@
 #define     INDEX_HEADER
 #include    <string>
 #include    <sys/types.h>
-class Index
+#include    "base/singleton.h"
+
+#define INDEX Index::GetInstance()
+
+class Index : public base::Singleton<Index>
 {
+    friend class Singleton<Index>;
     private:
-        Index& operator = (const Index&);
-        Index(const Index&);
+        Index(){OpenAllIndexFiles();}
 
     public:
+        void OpenAllIndexFiles();
         //If doc_md5 is null, we can guess that this is the end of doc.indx
-        static void WriteToDocIndex(const unsigned int doc_id, const off_t doc_offset, const std::string &doc_md5 = std::string(""));
-        static void WriteToUrlIndex(const unsigned int doc_id, const std::string &url_md5);
-        static void WriteToForwardIndex(const unsigned int doc_id, const std::string &html_data);
-        static void WriteToInvertedIndex(const std::string &data);
+        void WriteToDocIndex(const unsigned int doc_id, const off_t doc_offset, const std::string &doc_md5 = std::string(""));
+        void WriteToUrlIndex(const unsigned int doc_id, const std::string &url_md5);
+        void WriteToForwardIndex(const unsigned int doc_id, const std::string &html_data);
+        void WriteToInvertedIndex();
 
     private:
-        static int doc_index_file_fd_;
-        static int url_index_file_fd_;
-        static int forward_index_file_fd_;
-        static int inverted_index_file_fd_;
-        static int OpenFile(const std::string &filename);
-        static int WriteDocIndex(const void *write_buf, size_t count);
-        static int WriteUrlIndex(const void *write_buf, size_t count);
-        static int Write(int file_fd, const void *write_buf, size_t count);
+        int doc_index_file_fd_;
+        int url_index_file_fd_;
+        int forward_index_file_fd_;
+        int inverted_index_file_fd_;
+
+        int OpenFile(const std::string &filename);
+
+        int Write(int file_fd, const void *write_buf, size_t count);
 };
 #endif

@@ -1,12 +1,12 @@
 /*
  * ============================================================================
  *
- *       Filename:  test_singleton.cc
+ *       Filename:  main.cc
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  07/14/13 19:55:01
+ *        Created:  07/24/13 16:10:54
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,25 +15,14 @@
  *
  * ============================================================================
  */
-#include    "base/singleton.h"
+#include    "inverted_index.h"
 #include    "base/log.h"
 using namespace base;
 
-class A : public base::Singleton<A>
-{
-    friend class base::Singleton<A>;
-    private:
-        A(){}
-    public:
-        int id;
-};
-
 int main()
 {
-    A::GetInstance()->id = 3;
-
-    LOG_DEBUG << A::GetInstance()->id;
-
-    LOG_DEBUG << "\n";
+    InvertedIndex::GetInstance()->Query("hello");
+    InvertedIndex::GetInstance()->Query("高校");
+    LOG_END;
     return 0;
 }

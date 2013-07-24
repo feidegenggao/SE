@@ -24,7 +24,8 @@
 const std::string DICT_FILE_NAME("/root/lxf/se/index_match/words.dict");
 class Dict : public base::Singleton<Dict>
 {
-    public:
+    friend class Singleton<Dict>;
+    private:
         Dict();
     private:
         Dict(const Dict &);

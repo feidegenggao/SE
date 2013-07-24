@@ -23,23 +23,24 @@
 #include    <string>
 #include    <set>
 
+typedef std::set<unsigned int> DocSetT;
+typedef DocSetT::iterator DocSetTItor;
+typedef std::map<std::string, DocSetT> InvertedMapT;
+typedef std::pair<std::string, DocSetT > InvertedMapValueT;
+typedef InvertedMapT::iterator InvertedMapTItor;
+
 class InvertedMap : public base::Singleton<InvertedMap>
 {
+    friend class base::Singleton<InvertedMap>;
+    private:
+        InvertedMap(){}
     public:
         //Only in participle.cc can call this function
         void Insert(const std::string &key_word, unsigned int doc_id);
-    public:
-        //Only in main() can call this function: WriteToFile() when handle the
-        //end of the raw file
-        void WriteToFile();
+        DocSetT Search(const std::string &key_word);
+        const InvertedMapT& GetInvertedMap() const { return inverted_map_;}
 
     private:
-        typedef std::set<unsigned int> DocSetT;
-        typedef DocSetT::iterator DocSetTItor;
-        typedef std::map<std::string, DocSetT> InvertedMapT;
-        typedef std::pair<std::string, DocSetT > InvertedMapValueT;
-        typedef InvertedMapT::iterator InvertedMapTItor;
-
         InvertedMapT inverted_map_;
 };
 #endif

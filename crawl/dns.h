@@ -28,6 +28,9 @@ using std::string;
 class AddrSet;
 class DNS : public Singleton<DNS>
 {
+    friend class Singleton<DNS>;
+    private:
+        DNS(){}
     public:
         //we store the addr info into addrinfo ( type is AddrSet)
         //we will free the memory in AddrSet's destructer

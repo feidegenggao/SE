@@ -16,6 +16,7 @@
  * ============================================================================
  */
 #include    "index.h"
+#include    "inverted_map.h"
 #include    "participle.h"
 #include    "base/log.h"
 #include    "base/tools.h"
@@ -27,10 +28,13 @@ using namespace base;
 #include    <sstream>
 using namespace std;
 
-int Index::doc_index_file_fd_ = OpenFile("doc.index");
-int Index::url_index_file_fd_ = OpenFile("url.index");
-int Index::forward_index_file_fd_ = OpenFile("forward.index");
-int Index::inverted_index_file_fd_ = OpenFile("inverted.index");
+void Index::OpenAllIndexFiles()
+{
+    doc_index_file_fd_ = OpenFile("doc.index");
+    url_index_file_fd_ = OpenFile("url.index");
+    forward_index_file_fd_ = OpenFile("forward.index");
+    inverted_index_file_fd_ = OpenFile("inverted.index");
+}
 
 int Index::OpenFile(const string &filename)
 {
@@ -160,12 +164,28 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
     Write(forward_index_file_fd_, forward_index_str.c_str(), forward_index_str.length());
 }
 
-void Index::WriteToInvertedIndex(const std::string &data)
+void Index::WriteToInvertedIndex()
 {
-    Write(inverted_index_file_fd_, data.c_str(), data.length());
+    LOG_DEBUG << "WriteToFile";
+    InvertedMapT inverted_map = InvertedMap::GetInstance()->GetInvertedMap();
+    for (InvertedMapTItor start = inverted_map.begin(); start != inverted_map.end(); ++start)
+    {
+        std::string dst_str = start->first;
+        std::string doc_id_str;
+        for (DocSetTItor doc_set_it = start->second.begin(); doc_set_it != start->second.end(); ++doc_set_it)
+        {
+            doc_id_str = doc_id_str + ' ' + Convert<string, unsigned int>(*doc_set_it);
+        }
+        doc_id_str += '\n';
+
+        dst_str += doc_id_str;
+        Write(inverted_index_file_fd_, dst_str.c_str(), dst_str.length());
+    }
 }
 
 int Index::Write(int file_fd, const void *write_buf, size_t count)
 {
     return write(file_fd, (const void *)write_buf, count);
 }
+
+

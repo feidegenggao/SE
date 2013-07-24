@@ -104,15 +104,15 @@ int main(int argc, char *argv[])
         if (!GetRawDataAndUrl(raw_data, url)) break;
 
 
-        Index::WriteToDocIndex(doc_id, current_offset, MD5(raw_data));
-        Index::WriteToUrlIndex(doc_id, MD5(url));
-        Index::WriteToForwardIndex(doc_id, raw_data);
+        INDEX->WriteToDocIndex(doc_id, current_offset, MD5(raw_data));
+        INDEX->WriteToUrlIndex(doc_id, MD5(url));
+        INDEX->WriteToForwardIndex(doc_id, raw_data);
 
         doc_id++;
     }
 
-    Index::WriteToDocIndex(doc_id, GetRawFileOffset());
-    InvertedMap::GetInstance()->WriteToFile();
+    INDEX->WriteToDocIndex(doc_id, GetRawFileOffset());
+    INDEX->WriteToInvertedIndex();
 
     LOG_END;
     return SUCCESSFUL;
