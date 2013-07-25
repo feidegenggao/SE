@@ -19,10 +19,19 @@
 #include    "base/log.h"
 using namespace base;
 
+void PrintDocSet(const DocSetT &result_doc_set)
+{
+    for (DocSetTConstItor it = result_doc_set.begin(); it != result_doc_set.end(); ++it)
+    {
+        LOG_DEBUG << "doc_id:" << *it;
+    }
+}
+
 int main()
 {
-    InvertedIndex::GetInstance()->Query("hello");
-    InvertedIndex::GetInstance()->Query("高校");
+    DocSetT result_doc_set = InvertedIndex::GetInstance()->Query("高校");
+    PrintDocSet(result_doc_set);
+    result_doc_set = InvertedIndex::GetInstance()->Query("Hello Kityy");
     LOG_END;
     return 0;
 }

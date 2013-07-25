@@ -21,6 +21,7 @@
 #include    "index_match/inverted_map.h"
 #include    <fstream>
 #include    <string>
+#include    <vector>
 
 #define     INVERTED_INDEX InvertedIndex::GetInstance()
 class InvertedIndex : public base::Singleton<InvertedIndex>
@@ -31,6 +32,11 @@ class InvertedIndex : public base::Singleton<InvertedIndex>
 
     public:
         DocSetT Query(const std::string &query_str);
+
+    private:
+        DocSetT QueryKeyWord(const std::string &key_word);
+        DocSetT FindInterSection(const std::vector<DocSetT> &doc_set_vector);
+        DocSetT FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right);
 
     private:
         void Init();

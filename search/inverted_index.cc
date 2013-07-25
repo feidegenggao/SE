@@ -15,13 +15,16 @@
  *
  * ============================================================================
  */
+#include    "index_match/participle.h"
 #include    "inverted_index.h"
 #include    "base/log.h"
 #include    "base/tools.h"
+
 using namespace base;
 
 #include    <assert.h>
 #include    <string.h>
+using namespace std;
 
 const string INVERTED_INDEX_FILE_NAME("../index_match/inverted.index");
 
@@ -32,14 +35,76 @@ InvertedIndex::InvertedIndex()
 
 DocSetT InvertedIndex::Query(const std::string &query_str)
 {
+    DocSetT result_doc_set;
+    vector<DocSetT> doc_set_vector;
     LOG_DEBUG << "You want to query:" << query_str;
-    DocSetT result_set = InvertedMap::GetInstance()->Search(query_str);
-    for (DocSetT::iterator it = result_set.begin(); it != result_set.end(); ++it)
+    string remove_can_not_distinguish_word = RemoveNOChinese(query_str);
+    LOG_DEBUG << "After we handled, it become:" << remove_can_not_distinguish_word;
+
+    if (remove_can_not_distinguish_word.size() == 0)
     {
-        LOG_DEBUG << "*it:" << *it;
+        LOG_INFO << "We could not distingguish the words you input \
+            We could not service you... I am sorry";
+        return result_doc_set;
     }
 
+    vector<string> participled_str_vector = Participle(remove_can_not_distinguish_word);
+    for (vector<string>::iterator it = participled_str_vector.begin();
+            it != participled_str_vector.end(); ++it)
+    {
+        DocSetT this_key_word_doc_set = QueryKeyWord(*it);
+        if (this_key_word_doc_set.size() > 0)
+        {
+            doc_set_vector.push_back(this_key_word_doc_set);
+        }
+        else
+        {
+            //If we could not find the doc_set through this key_word
+            //We will ignore this key_word
+        }
+    }
+
+    result_doc_set = FindInterSection(doc_set_vector);
+    return result_doc_set;
+}
+
+DocSetT InvertedIndex::QueryKeyWord(const std::string &key_word)
+{
+    DocSetT result_set = InvertedMap::GetInstance()->Search(key_word);
     return result_set;
+}
+
+DocSetT InvertedIndex::FindInterSection(const std::vector<DocSetT> &doc_set_vector)
+{
+    //find the intersection of multi doc_set
+    DocSetT result_doc_set;
+    if (doc_set_vector.size() == 0) return result_doc_set;
+
+    vector<DocSetT>::const_iterator it = doc_set_vector.begin();
+    result_doc_set = *it++;
+
+    while(it != doc_set_vector.end())
+    {
+        result_doc_set = FindeInterSectionOfTwoSets(result_doc_set, *it);
+        it++;
+    }
+
+    return result_doc_set;
+}
+
+DocSetT InvertedIndex::FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right)
+{
+    DocSetT result_doc_set;
+    if (left.size() == 0 or right.size() == 0) return result_doc_set;
+
+    for (DocSetTItor it = left.begin(); it != left.end(); ++it)
+    {
+        if (right.end() != right.find(*it))
+        {
+            result_doc_set.insert(*it);
+        }
+    }
+    return result_doc_set;
 }
 
 void InvertedIndex::Init()
@@ -53,7 +118,6 @@ void InvertedIndex::Init()
         this_line = GetLine(fp_inverted_index);
         //reach the end of file
         if (0 == this_line.length()) break;
-        LOG_DEBUG << "This line:" << this_line << "EOF";
 
         string::iterator it = this_line.begin();
         //traversal this_line until reach the '\n'
@@ -67,7 +131,6 @@ void InvertedIndex::Init()
             }
             string::iterator key_word_end = it;
             string key_word(key_word_begin, key_word_end);
-            LOG_DEBUG << "key_word:" << key_word << "eof";
 
             while (*it != '\n')
             {
@@ -75,13 +138,10 @@ void InvertedIndex::Init()
                 string::iterator doc_id_begin = it;
                 while (*it != ' ' and *it != '\n')
                 {
-                    LOG_DEBUG << "start while, *it:" << *it << "eof";
                     it++;
                 }
-                LOG_DEBUG << "After while";
                 string::iterator doc_id_end = it;
                 string doc_id(doc_id_begin, doc_id_end);
-                LOG_DEBUG << "doc_id:" << doc_id;
                 InvertedMap::GetInstance()->Insert(key_word, Convert<unsigned int, string>(doc_id));
             }
 

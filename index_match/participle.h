@@ -20,6 +20,9 @@
 #ifndef     PARTICIPLE_HEADER
 #define     PARTICIPLE_HEADER
 #include    <string>
+#include    <vector>
 
-std::string Participle(unsigned int doc_id, std::string src_str);
+const std::string SEPARATOR(" ");
+std::vector<std::string> Participle(std::string src_str);
+std::string RemoveNOChinese(const std::string &dst_str);
 #endif

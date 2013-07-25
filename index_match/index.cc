@@ -93,53 +93,6 @@ string RemoveHTMLLLabel(const string &html_line)
     return dst_str;
 }
 
-string RemoveNOChinese(const string &dst_str)
-{
-    //FIXME:
-    //We only handle the HanZi, We should handle other language
-    string only_chinese_str;
-    string null_str;
-    for (string::const_iterator it = dst_str.begin(); it != dst_str.end(); it++)
-    {
-        if (0 == (*it & 0x80))//0000 0000-0000 007F
-        {
-
-        }
-        else if (0 == (*it & 0x20))//0000 0080-0000 07FF
-        {
-            it++;
-            //If some codes was illegal , we should handle this condition
-            if (it == dst_str.end()) return null_str;
-        }
-        else if (0 == (*it & 0x10))//0000 0800-0000 FFFF
-        {
-            string temp;
-            temp += *it;
-
-            for (int i = 0; i < 2; i++)
-            {
-                it++;
-                //If some codes was illegal , we should handle this condition
-                if (it == dst_str.end()) return null_str;
-                temp += *it;
-            }
-
-            only_chinese_str += temp;
-        }
-        else if (0 == (*it & 0x08))//0001 0000-0010 FFFF
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                it++;
-                //If some codes was illegal , we should handle this condition
-                if (it == dst_str.end()) return null_str;
-            }
-        }
-    }
-
-    return only_chinese_str;
-}
-
 void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_data)
 {
     stringstream temp_stream;
@@ -156,8 +109,13 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
         {
             string only_chinese_str = RemoveNOChinese(dst_str);
             //participled_str instead of HanZi that have been participled
-            string participled_str = Participle(doc_id, only_chinese_str);
-            forward_index_str += participled_str;
+            vector<string> participled_str_vector = Participle(only_chinese_str);
+            for (vector<string>::iterator it = participled_str_vector.begin();
+                    it != participled_str_vector.end(); ++it)
+            {
+                forward_index_str = forward_index_str + SEPARATOR + *it;
+                InvertedMap::GetInstance()->Insert(*it, doc_id);
+            }
         }
     }
     forward_index_str += '\n';

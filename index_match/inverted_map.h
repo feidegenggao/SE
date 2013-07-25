@@ -25,6 +25,7 @@
 
 typedef std::set<unsigned int> DocSetT;
 typedef DocSetT::iterator DocSetTItor;
+typedef DocSetT::const_iterator DocSetTConstItor;
 typedef std::map<std::string, DocSetT> InvertedMapT;
 typedef std::pair<std::string, DocSetT > InvertedMapValueT;
 typedef InvertedMapT::iterator InvertedMapTItor;

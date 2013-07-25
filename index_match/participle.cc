@@ -23,7 +23,6 @@ using namespace base;
 using namespace std;
 const unsigned int WORD_LEN = 3;//Every HanZi use 3 bytes to store(UTF-8)
 const unsigned int MAX_WORDS_LEN = 4;//The max length of sentence
-const string SEPARATOR(" ");
 
 int Min(int left, int right)
 {
@@ -31,9 +30,9 @@ int Min(int left, int right)
 }
 
 
-string Participle(unsigned int doc_id, string src_str)
+vector<string> Participle(string src_str)
 {
-    string participled_str;
+    vector<string> participled_str_vector;
 
     while(src_str.length() != 0)
     {
@@ -44,8 +43,7 @@ string Participle(unsigned int doc_id, string src_str)
             //find it
             if (Dict::GetInstance()->IsWord(key_word))
             {
-                participled_str = participled_str + SEPARATOR + key_word;
-                InvertedMap::GetInstance()->Insert(key_word, doc_id);
+                participled_str_vector.push_back(key_word);
                 break;
             }
             else
@@ -55,8 +53,7 @@ string Participle(unsigned int doc_id, string src_str)
 
             if (key_word.length() == WORD_LEN)
             {
-                participled_str = participled_str + SEPARATOR + key_word;
-                InvertedMap::GetInstance()->Insert(key_word, doc_id);
+                participled_str_vector.push_back(key_word);
                 if (len == 0) len = WORD_LEN;
                 break;
             }
@@ -67,5 +64,52 @@ string Participle(unsigned int doc_id, string src_str)
         src_str.erase(0, len);
     }
 
-    return participled_str;
+    return participled_str_vector;
+}
+
+string RemoveNOChinese(const string &dst_str)
+{
+    //FIXME:
+    //We only handle the HanZi, We should handle other language
+    string only_chinese_str;
+    string null_str;
+    for (string::const_iterator it = dst_str.begin(); it != dst_str.end(); it++)
+    {
+        if (0 == (*it & 0x80))//0000 0000-0000 007F
+        {
+
+        }
+        else if (0 == (*it & 0x20))//0000 0080-0000 07FF
+        {
+            it++;
+            //If some codes was illegal , we should handle this condition
+            if (it == dst_str.end()) return null_str;
+        }
+        else if (0 == (*it & 0x10))//0000 0800-0000 FFFF
+        {
+            string temp;
+            temp += *it;
+
+            for (int i = 0; i < 2; i++)
+            {
+                it++;
+                //If some codes was illegal , we should handle this condition
+                if (it == dst_str.end()) return null_str;
+                temp += *it;
+            }
+
+            only_chinese_str += temp;
+        }
+        else if (0 == (*it & 0x08))//0001 0000-0010 FFFF
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                it++;
+                //If some codes was illegal , we should handle this condition
+                if (it == dst_str.end()) return null_str;
+            }
+        }
+    }
+
+    return only_chinese_str;
 }
