@@ -28,11 +28,13 @@ using namespace net;
 bool GetPage(const Url &server_url, string &http_header, string &html_data)
 {
     Socket client_socket;
+    LOG_DEBUG << "start connect";
     if (!client_socket.Connect(server_url.GetSockAddr())) 
     {
         LOG_ERROR << "Can't connect url:" << server_url.Str();
         return false;
     }
+    LOG_DEBUG << "after connect";
 
     //Group the HTTP header that will send to HTTP-Server
     //Get
@@ -51,7 +53,9 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     send_data += "\r\n";
     //End Group the HTTP header that will send to HTTP-Server
 
+    LOG_DEBUG << "start write";
     client_socket.Write(send_data.c_str(), send_data.length());
+    LOG_DEBUG << "after write";
 
     const int MAXLENFORHTML = 1024 * 5;
     char read_buf[MAXLENFORHTML] = {0};
@@ -62,7 +66,11 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
     do
     {
         memset(read_buf, 0, sizeof(read_buf));
+        LOG_DEBUG << "before read";
+        //FIXME:read and write set to block and add timer to interupt
+        //the timeout operation
         read_n = client_socket.Read(read_buf, sizeof(read_buf) - 1);
+        LOG_DEBUG << "after read";
         if (read_n < 0) return false;
         read_buf[sizeof(read_buf) - 1] = '\0';
 
