@@ -54,6 +54,10 @@ Socket::Socket(const SockAddr &listen_addr):LISTEN_BACKLOG(1024)
     assert(sock_st_ == INIT);
     
     struct sockaddr_in listen_addr_socket_in = listen_addr.GetStructSockaddrIn();
+    int optval = 1;
+    socklen_t optlen = sizeof(optval);
+    int setsockopt_result = setsockopt(sockfd_, SOL_SOCKET, SO_REUSEADDR, (void*)(&optval), optlen);
+    assert(setsockopt_result == 0);
     int bind_rt = bind(sockfd_, (const struct sockaddr *) (&listen_addr_socket_in),
           sizeof(listen_addr_socket_in));
     assert(bind_rt == 0);
