@@ -22,13 +22,7 @@ using namespace base;
 #include    <iostream>
 using namespace std;
 
-void PrintDocSet(const DocSetT &result_doc_set)
-{
-    for (DocSetTConstItor it = result_doc_set.begin(); it != result_doc_set.end(); ++it)
-    {
-        cout << "doc_id:" << *it << endl;
-    }
-}
+void PrintDocSet(const DocSetT &result_doc_set);
 
 int main(int argc, char *argv[])
 {
@@ -53,4 +47,12 @@ int main(int argc, char *argv[])
 
     LOG_END;
     return 0;
+}
+
+void PrintDocSet(const DocSetT &result_doc_set)
+{
+    for (DocSetTConstItor it = result_doc_set.begin(); it != result_doc_set.end(); ++it)
+    {
+        cout << "doc_id:" << *it << endl;
+    }
 }

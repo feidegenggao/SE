@@ -38,10 +38,10 @@ void InvertedMap::Insert(const std::string &key_word, unsigned int doc_id)
     }
 }
 
-DocSetT InvertedMap::Search(const std::string &key_word)
+DocSetT InvertedMap::Search(const std::string &key_word) const
 {
     DocSetT result_set;
-    InvertedMapTItor find_it = inverted_map_.find(key_word);
+    InvertedMapTConstItor find_it = inverted_map_.find(key_word);
     if (find_it == inverted_map_.end())
     {
     }

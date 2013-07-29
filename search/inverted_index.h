@@ -31,12 +31,12 @@ class InvertedIndex : public base::Singleton<InvertedIndex>
         InvertedIndex();
 
     public:
-        DocSetT Query(const std::string &query_str);
+        DocSetT Query(const std::string &query_str) const;
 
     private:
-        DocSetT QueryKeyWord(const std::string &key_word);
-        DocSetT FindInterSection(const std::vector<DocSetT> &doc_set_vector);
-        DocSetT FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right);
+        DocSetT QueryKeyWord(const std::string &key_word) const;
+        DocSetT FindInterSection(const std::vector<DocSetT> &doc_set_vector) const;
+        DocSetT FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right) const;
 
     private:
         void Init();

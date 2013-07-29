@@ -29,6 +29,7 @@ typedef DocSetT::const_iterator DocSetTConstItor;
 typedef std::map<std::string, DocSetT> InvertedMapT;
 typedef std::pair<std::string, DocSetT > InvertedMapValueT;
 typedef InvertedMapT::iterator InvertedMapTItor;
+typedef InvertedMapT::const_iterator InvertedMapTConstItor;
 
 class InvertedMap : public base::Singleton<InvertedMap>
 {
@@ -38,7 +39,7 @@ class InvertedMap : public base::Singleton<InvertedMap>
     public:
         //Only in participle.cc can call this function
         void Insert(const std::string &key_word, unsigned int doc_id);
-        DocSetT Search(const std::string &key_word);
+        DocSetT Search(const std::string &key_word) const;
         const InvertedMapT& GetInvertedMap() const { return inverted_map_;}
 
     private:

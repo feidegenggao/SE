@@ -33,7 +33,7 @@ InvertedIndex::InvertedIndex()
     Init();
 }
 
-DocSetT InvertedIndex::Query(const std::string &query_str)
+DocSetT InvertedIndex::Query(const std::string &query_str) const
 {
     DocSetT result_doc_set;
     vector<DocSetT> doc_set_vector;
@@ -68,13 +68,13 @@ DocSetT InvertedIndex::Query(const std::string &query_str)
     return result_doc_set;
 }
 
-DocSetT InvertedIndex::QueryKeyWord(const std::string &key_word)
+DocSetT InvertedIndex::QueryKeyWord(const std::string &key_word) const
 {
     DocSetT result_set = InvertedMap::GetInstance()->Search(key_word);
     return result_set;
 }
 
-DocSetT InvertedIndex::FindInterSection(const std::vector<DocSetT> &doc_set_vector)
+DocSetT InvertedIndex::FindInterSection(const std::vector<DocSetT> &doc_set_vector) const
 {
     //find the intersection of multi doc_set
     DocSetT result_doc_set;
@@ -92,7 +92,7 @@ DocSetT InvertedIndex::FindInterSection(const std::vector<DocSetT> &doc_set_vect
     return result_doc_set;
 }
 
-DocSetT InvertedIndex::FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right)
+DocSetT InvertedIndex::FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right) const
 {
     DocSetT result_doc_set;
     if (left.size() == 0 or right.size() == 0) return result_doc_set;
