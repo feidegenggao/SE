@@ -46,6 +46,27 @@ int main()
     LOG_DEBUG << "read sum:" << read_sum;
 
 
+    //test server's socket
+    SockAddr listen_addr(8888);
+    Socket listen_socket(listen_addr);
+    listen_socket.Listen();
+
+    while(true)
+    {
+        const int accept_fd = listen_socket.Accept();
+        Socket accept_socket(accept_fd);
+        LOG_DEBUG << "Accept fd:" << accept_fd;
+
+        char read_buf[1024] = {0};
+        string write_str("Hello everyone, I am pighead");
+
+        accept_socket.Write(write_str.c_str(), write_str.length());
+        accept_socket.Read(read_buf, sizeof(read_buf));
+
+        LOG_DEBUG << "read_buf:" << read_buf;
+    }
+
+
     LOG_END;
     return 0;
 }

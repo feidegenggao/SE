@@ -19,9 +19,10 @@
 #include    "net/sock_addr.h"
 #include    <assert.h>
 #include    <sys/socket.h>
+#include    <sys/types.h>
 
 using namespace net;
-Socket::Socket()
+Socket::Socket():LISTEN_BACKLOG(0)
 {
     sockfd_ = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd_ > 0)
@@ -32,6 +33,32 @@ Socket::Socket()
     {
         sock_st_ = INVALID;
     }
+}
+
+Socket::Socket(int accept_fd):LISTEN_BACKLOG(0),sockfd_(accept_fd)
+{
+    sock_st_ = CONNECTED;
+}
+
+Socket::Socket(const SockAddr &listen_addr):LISTEN_BACKLOG(1024)
+{
+    sockfd_ = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd_ > 0)
+    {
+        sock_st_ = INIT;
+    }
+    else
+    {
+        sock_st_ = INVALID;
+    }
+    assert(sock_st_ == INIT);
+    
+    struct sockaddr_in listen_addr_socket_in = listen_addr.GetStructSockaddrIn();
+    int bind_rt = bind(sockfd_, (const struct sockaddr *) (&listen_addr_socket_in),
+          sizeof(listen_addr_socket_in));
+    assert(bind_rt == 0);
+
+    sock_st_ = BIND;
 }
 
 Socket::~Socket()
@@ -55,6 +82,23 @@ bool Socket::Connect(const SockAddr &server_addr)
         sock_st_ = INVALID;
         return false;
     }
+}
+
+int Socket::Listen()
+{
+    assert(sock_st_ == BIND and LISTEN_BACKLOG > 0);
+    int listen_rt = listen(sockfd_, LISTEN_BACKLOG);
+    assert(listen_rt == 0);
+
+    sock_st_ = LISTENING;
+    return 0;
+}
+
+int Socket::Accept()
+{
+    assert(sock_st_ == LISTENING);
+    int accept_fd = accept(sockfd_, NULL, NULL);
+    return accept_fd;
 }
 
 ssize_t Socket::Read(void *buf, size_t count)

@@ -19,6 +19,7 @@
 #define     BASE_SOCKET_HEADER
 
 #include    <unistd.h>
+#include    "sock_addr.h"
 namespace net
 {
     class SockAddr;
@@ -26,6 +27,8 @@ namespace net
     {
         INIT,
         CONNECTED,
+        BIND,
+        LISTENING,
         INVALID
     };
 
@@ -33,6 +36,10 @@ namespace net
     {
         public:
             Socket();
+            //create listen socket
+            Socket(const SockAddr &listen_addr);
+            //create accept socket
+            Socket(int accept_fd);
             ~Socket();
             //            explicit Socket(int sockfd):sockfd_(sockfd){}
             SocketStatus Status() const { return sock_st_;}
@@ -40,9 +47,20 @@ namespace net
             ssize_t Read(void *buf, size_t count);
             ssize_t Write(const void *buf, size_t count);
 
+        public:
+            int Listen();
+            int Accept();
+
+        private:
+            const int LISTEN_BACKLOG;
+
         private:
             /* const  */int sockfd_;
             SocketStatus sock_st_;
+
+        private:
+            Socket& operator = (const Socket&);
+            Socket(const Socket&);
     };
 }
 #endif
