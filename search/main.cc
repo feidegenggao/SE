@@ -15,6 +15,7 @@
  *
  * ============================================================================
  */
+#include    "search.h"
 #include    "inverted_index.h"
 #include    "base/log.h"
 using namespace base;
@@ -44,6 +45,9 @@ int main(int argc, char *argv[])
 
     DocSetT result_doc_set = InvertedIndex::GetInstance()->Query(query_str);
     PrintDocSet(result_doc_set);
+
+    StartSearch();
+
 
     LOG_END;
     return 0;
