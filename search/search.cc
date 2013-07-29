@@ -33,10 +33,13 @@ static void *HandleQuery(void *p_accept_fd)
     LOG_DEBUG << "accept_fd:" << accept_fd;
     Socket accept_socket(accept_fd);
     char read_buf[1024] = {0};
-    string write_buf("Hello everyone, I am pighead");
-
-    accept_socket.Write(write_buf.c_str(), write_buf.length());
     accept_socket.Read(read_buf, sizeof(read_buf) - 1);
+
+    //If you  send data to php-cgi, we MUST add \n at the end of the string,
+    //When php-cgi read data as PHP_NORMAL_READ type.
+    string write_buf("Hello everyone, I am pighead\n");
+    ssize_t write_n = accept_socket.Write(write_buf.c_str(), write_buf.length());
+    LOG_DEBUG << "writed num:" << write_n;
     LOG_DEBUG << "read:" << read_buf;
 
     return NULL;
