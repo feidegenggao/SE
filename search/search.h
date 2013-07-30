@@ -25,5 +25,5 @@ const uint16_t SEARCH_LISTEN_PORT = 19999;
 //open listen port and ready for search
 void StartSearch();
 //query key_words
-void Query(const std::string &key_word);
+//void Query(const std::string &key_word);
 #endif
