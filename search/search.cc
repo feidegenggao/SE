@@ -39,6 +39,7 @@ static const int PORTAL_SEARCH_QUERY = 1;
 static const int PORTAL_SEARCH_QUERY_OK = 2;
 static const int PORTAL_SEARCH_QUERY_ARGUMENT_ILLEGAL = 3;
 static const int PORTAL_SEARCH_QUERY_OTHER_ERROR = 4;
+static const string PORTAL_SEARCH_DATA_SEPARATOR("\n");
 
 void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
 {
@@ -48,16 +49,20 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
     {
         string data_body;
         string url = DocIndex::GetInstance()->GetUrl(*it);
-        data_body += url;
+        string title = DocIndex::GetInstance()->GetTitle(*it); 
+        string summary;
+        data_body = title + PORTAL_SEARCH_DATA_SEPARATOR +
+            url + PORTAL_SEARCH_DATA_SEPARATOR +
+            summary + PORTAL_SEARCH_DATA_SEPARATOR;
 
         int data_len = data_body.length();
-
         LOG_DEBUG << "cmd:" << PORTAL_SEARCH_QUERY_OK;
         LOG_DEBUG << "data_len:" << data_len;
         LOG_DEBUG << "all_num:" << result_doc_set.size();
         LOG_DEBUG << "index_num:" << i++;
         LOG_DEBUG << "arg3:" << "";
         LOG_DEBUG << "get url:" << url; 
+        LOG_DEBUG << "get title:" << title;
         WriteDataGram(accept_socket, Convert<string, int>(PORTAL_SEARCH_QUERY_OK),
                 Convert<string, int>(data_len), Convert<string, int>(result_doc_set.size()),
                 Convert<string, int>(i), "", data_body);
@@ -70,15 +75,16 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
 static void GetDataGram(Socket &accept_socket, string &dst_str)
 {
     do{
-        char read_buf[1] = {0};
-        accept_socket.Read(read_buf, sizeof(read_buf));
-        if (*read_buf == '\n')
+        char read_buf[2] = {0};
+        accept_socket.Read(read_buf, sizeof(read_buf) - 1);
+        string temp(read_buf);
+        if (temp == PORTAL_SEARCH_DATA_SEPARATOR)
         {
             break;
         }
         else
         {
-            dst_str += *read_buf;
+            dst_str += temp;
         }
     }while(true);
 }
@@ -152,8 +158,12 @@ void WriteDataGram(Socket &accept_socket,
         const string &cmd, const string &datalen, const string &arg1,
         const string &arg2, const string &arg3, const string &data_body)
 {
-    string send_data = cmd + "\n" + datalen + "\n" + 
-        arg1 + "\n" + arg2 + "\n" + arg3 + "\n" + data_body;
+    string send_data = cmd + PORTAL_SEARCH_DATA_SEPARATOR + 
+        datalen + PORTAL_SEARCH_DATA_SEPARATOR + 
+        arg1 + PORTAL_SEARCH_DATA_SEPARATOR + 
+        arg2 + PORTAL_SEARCH_DATA_SEPARATOR + 
+        arg3 + PORTAL_SEARCH_DATA_SEPARATOR + data_body;
+
     ssize_t write_n = accept_socket.Write(send_data.c_str(), send_data.length());
     LOG_DEBUG << "accept_socket send data:" << write_n;
 }

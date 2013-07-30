@@ -81,6 +81,36 @@ string DocIndex::GetUrl(unsigned int doc_id) const
 string DocIndex::GetTitle(unsigned int doc_id) const
 {
     string title;
+    SeekSet(doc_index_map_.find(doc_id)->second);
+    string url;
+    string data;
+    if (GetRawDataAndUrl(data, url))
+    {
+        //success get data and url
+    }
+    else
+    {
+        //failed get raw data , return empty string
+        return title;
+    }
+
+    stringstream temp_stream;
+    temp_stream << data;
+    string temp_line;
+
+    RegexSearchResultType result;
+    string regex_find_title("[^<]*<title>(.*)</title>.*");
+
+    while (getline(temp_stream, temp_line))
+    {
+        RegexSearch(temp_line, regex_find_title, result);
+        if (result.size() > 0)
+        {
+            title = Convert<string, RegexSearchElementType>(*result.begin());
+            return title;
+        }
+    }
+
     return title;
 }
 
@@ -126,6 +156,6 @@ string DocIndex::GetLine(FILE *fp)
         }
 
     }while(true);
-    
+
     return this_line;
 }

@@ -1,0 +1,47 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BASE_DIR	makefile	/^BASE_DIR=$(PROJECT_ROOT)\/base$/;"	m
+COMPLIE_LIB	makefile	/^COMPLIE_LIB= -lpthread $/;"	m
+COMPLIE_OPTION	makefile	/^COMPLIE_OPTION= -g -Wall -Werror -I$(PROJECT_ROOT) $/;"	m
+DOC_INDEX_HEADER	doc_index.h	20;"	d
+DocIndex	doc_index.cc	/^DocIndex::DocIndex()$/;"	f	class:DocIndex
+DocIndex	doc_index.h	/^class DocIndex : public base::Singleton<DocIndex>$/;"	c
+FindInterSection	inverted_index.cc	/^DocSetT InvertedIndex::FindInterSection(const std::vector<DocSetT> &doc_set_vector) const$/;"	f	class:InvertedIndex
+FindeInterSectionOfTwoSets	inverted_index.cc	/^DocSetT InvertedIndex::FindeInterSectionOfTwoSets(const DocSetT &left, const DocSetT &right) const$/;"	f	class:InvertedIndex
+GetDataGram	search.cc	/^static void GetDataGram(Socket &accept_socket, string &dst_str)$/;"	f	file:
+GetLine	doc_index.cc	/^string DocIndex::GetLine(FILE *fp)$/;"	f	class:DocIndex
+GetLine	inverted_index.cc	/^string InvertedIndex::GetLine(FILE *fp_inverted_index)$/;"	f	class:InvertedIndex
+GetSummary	doc_index.cc	/^string DocIndex::GetSummary(unsigned int doc_id) const$/;"	f	class:DocIndex
+GetTitle	doc_index.cc	/^string DocIndex::GetTitle(unsigned int doc_id) const$/;"	f	class:DocIndex
+GetUrl	doc_index.cc	/^string DocIndex::GetUrl(unsigned int doc_id) const$/;"	f	class:DocIndex
+HandleQuery	search.cc	/^static void *HandleQuery(void *p_accept_fd)$/;"	f	file:
+INDEX_MATCH_DIR	makefile	/^INDEX_MATCH_DIR=$(PROJECT_ROOT)\/index_match$/;"	m
+INVERTED_INDEX	inverted_index.h	26;"	d
+INVERTED_INDEX_HEADER	inverted_index.h	19;"	d
+Init	doc_index.cc	/^void DocIndex::Init()$/;"	f	class:DocIndex
+Init	inverted_index.cc	/^void InvertedIndex::Init()$/;"	f	class:InvertedIndex
+InvertedIndex	inverted_index.cc	/^InvertedIndex::InvertedIndex()$/;"	f	class:InvertedIndex
+InvertedIndex	inverted_index.h	/^class InvertedIndex : public base::Singleton<InvertedIndex>$/;"	c
+NET_DIR	makefile	/^NET_DIR=$(PROJECT_ROOT)\/net$/;"	m
+OpenInvertedIndexFile	inverted_index.cc	/^void InvertedIndex::OpenInvertedIndexFile(const std::string &file_name)$/;"	f	class:InvertedIndex
+PORTAL_SEARCH_QUERY	search.cc	/^static const int PORTAL_SEARCH_QUERY = 1;$/;"	v	file:
+PORTAL_SEARCH_QUERY_ARGUMENT_ILLEGAL	search.cc	/^static const int PORTAL_SEARCH_QUERY_ARGUMENT_ILLEGAL = 3;$/;"	v	file:
+PORTAL_SEARCH_QUERY_OK	search.cc	/^static const int PORTAL_SEARCH_QUERY_OK = 2;$/;"	v	file:
+PORTAL_SEARCH_QUERY_OTHER_ERROR	search.cc	/^static const int PORTAL_SEARCH_QUERY_OTHER_ERROR = 4;$/;"	v	file:
+PROJECT_ROOT	makefile	/^PROJECT_ROOT=\/root\/lxf\/se$/;"	m
+PrintDocSet	main.cc	/^void PrintDocSet(const DocSetT &result_doc_set)$/;"	f
+Query	inverted_index.cc	/^DocSetT InvertedIndex::Query(const std::string &query_str) const$/;"	f	class:InvertedIndex
+QueryKeyWord	inverted_index.cc	/^DocSetT InvertedIndex::QueryKeyWord(const std::string &key_word) const$/;"	f	class:InvertedIndex
+SEARCH_HEADER	search.h	19;"	d
+SEARCH_LISTEN_PORT	search.h	/^const uint16_t SEARCH_LISTEN_PORT = 19999;$/;"	v
+SendDataOfKeyWord	search.cc	/^void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)$/;"	f
+StartSearch	search.cc	/^void StartSearch()$/;"	f
+WriteDataGram	search.cc	/^void WriteDataGram(Socket &accept_socket, $/;"	f
+doc_index_file_fp_	doc_index.h	/^        FILE *doc_index_file_fp_;$/;"	m	class:DocIndex
+doc_index_map_	doc_index.h	/^        std::map<unsigned int, off_t> doc_index_map_;$/;"	m	class:DocIndex
+fp_inverted_index	inverted_index.h	/^        FILE *fp_inverted_index;$/;"	m	class:InvertedIndex
+main	main.cc	/^int main(int argc, char *argv[])$/;"	f
