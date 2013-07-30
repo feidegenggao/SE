@@ -89,9 +89,10 @@ int main(int argc, char *argv[])
     RegexSearch(http_header, regex_find_code, result);
     PrintSearchResult(result);
 
-
-
-
+    string http_title("<title>首页 - 电子科技大学后勤综合服务平台 - Powered by Supwisdom</title>");
+    string regex_find_title("[^<]*<title>(.*)</title>.*");
+    RegexSearch(http_title, regex_find_title, result);
+    PrintSearchResult(result);
 
     LOG_END;
     return 0;
