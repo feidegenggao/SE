@@ -59,14 +59,13 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
         LOG_DEBUG << "cmd:" << PORTAL_SEARCH_QUERY_OK;
         LOG_DEBUG << "data_len:" << data_len;
         LOG_DEBUG << "all_num:" << result_doc_set.size();
-        LOG_DEBUG << "index_num:" << i++;
+        LOG_DEBUG << "index_num:" << ++i;
         LOG_DEBUG << "arg3:" << "";
         LOG_DEBUG << "get url:" << url; 
         LOG_DEBUG << "get title:" << title;
         WriteDataGram(accept_socket, Convert<string, int>(PORTAL_SEARCH_QUERY_OK),
                 Convert<string, int>(data_len), Convert<string, int>(result_doc_set.size()),
                 Convert<string, int>(i), "", data_body);
-
     }
 }
 
@@ -127,13 +126,9 @@ static void *HandleQuery(void *p_accept_fd)
             }
     }
 
-
-    //If you  send data to php-cgi, we MUST add \n at the end of the string,
-    //When php-cgi read data as PHP_NORMAL_READ type.
-    string write_buf("Hello everyone, I am pighead\n");
-    ssize_t write_n = accept_socket.Write(write_buf.c_str(), write_buf.length());
-    LOG_DEBUG << "writed num:" << write_n;
-
+    string bye_words;
+    GetDataGram(accept_socket, bye_words);
+    
     return NULL;
 }
 
