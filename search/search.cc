@@ -44,6 +44,11 @@ static const string PORTAL_SEARCH_DATA_SEPARATOR("\n");
 void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
 {
     DocSetT result_doc_set = InvertedIndex::GetInstance()->Query(key_word);
+    if (result_doc_set.size() == 0)
+    {
+        WriteDataGram(accept_socket, Convert<string, int>(PORTAL_SEARCH_QUERY_OTHER_ERROR),
+                "", "", "", "", PORTAL_SEARCH_DATA_SEPARATOR);
+    }
     int i = 0;
     for (DocSetTConstItor it = result_doc_set.begin(); it != result_doc_set.end(); ++it)
     {
