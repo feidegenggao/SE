@@ -91,3 +91,8 @@ off_t GetRawFileOffset()
 {
     return lseek(detail::raw_file_fd, 0, SEEK_CUR);
 }
+
+off_t SeekSet(off_t off_set)
+{
+    return lseek(detail::raw_file_fd, off_set, SEEK_SET);
+}

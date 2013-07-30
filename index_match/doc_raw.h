@@ -21,4 +21,5 @@
 void OpenDocRaw(std::string raw_file_name);
 bool GetRawDataAndUrl(std::string &raw_data, std::string &url);
 off_t GetRawFileOffset();
+off_t SeekSet(off_t off_set);
 #endif
