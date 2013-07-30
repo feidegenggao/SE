@@ -18,6 +18,7 @@
 #include    "base/regex.h"
 
 #include    <boost/regex.hpp>
+using namespace std;
 bool base::RegexMatch(const string &s, const string &regex)
 {
     boost::regex reg(regex.c_str());
