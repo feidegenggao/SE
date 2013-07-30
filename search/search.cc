@@ -126,6 +126,9 @@ static void *HandleQuery(void *p_accept_fd)
             }
     }
 
+    //accept socket should shutdown the socket when send the data to php-cgi completely. 
+    //But we close the socket, so php-cgi(portal) may be receive the RST before read all the datas. 
+    //Currently, our socket class does not have the shutdown api, so, we add the end datagrame ,just say Bye
     string bye_words;
     GetDataGram(accept_socket, bye_words);
     

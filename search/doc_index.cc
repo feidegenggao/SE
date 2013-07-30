@@ -106,7 +106,7 @@ string DocIndex::GetTitle(unsigned int doc_id) const
         RegexSearch(temp_line, regex_find_title, result);
         if (result.size() > 0)
         {
-            title = Convert<string, RegexSearchElementType>(*result.begin());
+            title = *result.begin();
             return title;
         }
     }
