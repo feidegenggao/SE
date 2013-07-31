@@ -131,6 +131,7 @@ string ForwardIndexIndex::GetSummary(const string &key_words, unsigned int doc_i
                 summary += temp_line;
                 rest_len_of_this_sentence -= temp_line.length();
             }
+            summary += string("...");
         }
         if (summary.length() > SummaryMaxLenK) break;
     }
