@@ -16,6 +16,7 @@
  * ============================================================================
  */
 #include    "search/search.h"
+#include    "search/forward_index_index.h"
 #include    "search/inverted_index.h"
 #include    "search/doc_index.h"
 #include    "base/log.h"
@@ -55,7 +56,7 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
         string data_body;
         string url = DocIndex::GetInstance()->GetUrl(*it);
         string title = DocIndex::GetInstance()->GetTitle(*it); 
-        string summary;
+        string summary = ForwardIndexIndex::GetInstance()->GetSummary(*it);
         data_body = title + PORTAL_SEARCH_DATA_SEPARATOR +
             url + PORTAL_SEARCH_DATA_SEPARATOR +
             summary + PORTAL_SEARCH_DATA_SEPARATOR;
