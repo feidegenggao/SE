@@ -35,6 +35,7 @@ class Index : public base::Singleton<Index>
         void WriteToDocIndex(const unsigned int doc_id, const off_t doc_offset, const std::string &doc_md5 = std::string(""));
         void WriteToUrlIndex(const unsigned int doc_id, const std::string &url_md5);
         void WriteToForwardIndex(const unsigned int doc_id, const std::string &html_data);
+        void WriteTheLastIndeToForwardIndexIndex(const unsigned int doc_id);
         void WriteToInvertedIndex();
 
     private:

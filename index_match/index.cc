@@ -127,6 +127,14 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
     Write(forward_index_file_fd_, forward_index_str.c_str(), forward_index_str.length());
 }
 
+void Index::WriteTheLastIndeToForwardIndexIndex(unsigned int doc_id)
+{
+    off_t forward_index_file_cur_off_set = lseek(forward_index_file_fd_, 0, SEEK_CUR);
+    string forward_index_index_str = Convert<string, unsigned int>(doc_id) + SEPARATOR +
+        Convert<string, off_t>(forward_index_file_cur_off_set) + "\n";
+    Write(forward_index_index_file_fd_, forward_index_index_str.data(), forward_index_index_str.length());
+}
+
 void Index::WriteToInvertedIndex()
 {
     LOG_DEBUG << "WriteToFile";

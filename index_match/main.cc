@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
     }
 
     INDEX->WriteToDocIndex(doc_id, GetRawFileOffset());
+    INDEX->WriteTheLastIndeToForwardIndexIndex(doc_id);
     INDEX->WriteToInvertedIndex();
 
     LOG_END;
