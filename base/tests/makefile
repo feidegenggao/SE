@@ -15,5 +15,8 @@ md5:
 tools:
 	g++ test_tools.cc $(BASE_DIR)/time_stamp.cc $(COMPLIE_OPTION) -o test_tools.out
 
+file:
+	g++ test_file.cc $(BASE_DIR)/time_stamp.cc $(BASE_DIR)/file.cc $(COMPLIE_OPTION) -o test_file.out
+
 clean:
 	rm *.out
