@@ -33,6 +33,7 @@ void Index::OpenAllIndexFiles()
     doc_index_file_fd_ = OpenFile("doc.index");
     url_index_file_fd_ = OpenFile("url.index");
     forward_index_file_fd_ = OpenFile("forward.index");
+    forward_index_index_file_fd_ = OpenFile("forward_index.index");
     inverted_index_file_fd_ = OpenFile("inverted.index");
 }
 
@@ -119,6 +120,10 @@ void Index::WriteToForwardIndex(const unsigned int doc_id, const string &html_da
         }
     }
     forward_index_str += '\n';
+    off_t forward_index_file_cur_off_set = lseek(forward_index_file_fd_, 0, SEEK_CUR);
+    string forward_index_index_str = Convert<string, unsigned int>(doc_id) + SEPARATOR +
+        Convert<string, off_t>(forward_index_file_cur_off_set) + "\n";
+    Write(forward_index_index_file_fd_, forward_index_index_str.data(), forward_index_index_str.length());
     Write(forward_index_file_fd_, forward_index_str.c_str(), forward_index_str.length());
 }
 

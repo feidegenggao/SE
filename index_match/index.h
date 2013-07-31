@@ -38,9 +38,15 @@ class Index : public base::Singleton<Index>
         void WriteToInvertedIndex();
 
     private:
+        //store the doc_id--off_set of doc.raw named:doc.index
         int doc_index_file_fd_;
+        //store the url--doc_id named:url.index
         int url_index_file_fd_;
+        //store the doc_id--Particile_words named:forward.index
         int forward_index_file_fd_;
+        //store the doc_id--off_set of forward.index named:forward_index.index
+        int forward_index_index_file_fd_;
+        //store the Particile_words--doc_id named:inverted.index
         int inverted_index_file_fd_;
 
         int OpenFile(const std::string &filename);
