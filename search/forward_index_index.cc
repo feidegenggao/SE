@@ -21,6 +21,7 @@
 using namespace base;
 
 #include    "forward_index_index.h"
+#include    "index_match/participle.h"
 
 #include    <assert.h>
 #include    <sys/types.h>
@@ -81,9 +82,61 @@ string ForwardIndexIndex::GetForwardIndexString(unsigned int doc_id) const
     return pariticlied_words;
 }
 
-string ForwardIndexIndex::GetSummary(unsigned int doc_id) const
+vector<string>::iterator FindStringInVectorString(const string &key_words,
+        vector<string> &dst_vector_string)
 {
+    for (vector<string>::iterator it = dst_vector_string.begin();
+           it != dst_vector_string.end(); it++)
+    {
+        if (*it == key_words)
+            return it;
+    } 
+
+    return dst_vector_string.end();
+}
+
+string ForwardIndexIndex::GetSummary(const string &key_words, unsigned int doc_id) const
+{
+    string forward_words = GetForwardIndexString(doc_id);
+    stringstream temp_stream;
+    temp_stream << forward_words;
+
+    string remove_can_not_distinguish_word = RemoveNOChinese(key_words);
+    vector<string> participled_str_vector = Participle(remove_can_not_distinguish_word);
+
+    const size_t SummaryMaxLenK = 60 * 3;
+    const size_t MaxSentenceLenK = 30 * 3;
     string summary;
-    LOG_DEBUG << "summary:" << GetForwardIndexString(doc_id);
+    string temp_line;
+    vector<string>::iterator find_result_itor;
+    while (temp_stream >> temp_line )
+    {
+        find_result_itor = FindStringInVectorString(temp_line, participled_str_vector);
+
+        if (find_result_itor != participled_str_vector.end())
+        {
+            LOG_DEBUG << "find_result not end()";
+            int rest_len_of_this_sentence = MaxSentenceLenK;
+            rest_len_of_this_sentence -= temp_line.length();
+            summary += string("<em>") + temp_line + string("</em>");
+            while (rest_len_of_this_sentence > 0)
+            {
+                //if temp_stream reach the end
+                if (! (temp_stream >> temp_line)) break;
+
+                 find_result_itor = FindStringInVectorString(temp_line, participled_str_vector);
+                 if (find_result_itor != participled_str_vector.end())
+                     temp_line = string("<em>") + temp_line + string("</em>");
+
+                summary += temp_line;
+                rest_len_of_this_sentence -= temp_line.length();
+            }
+            participled_str_vector.erase(find_result_itor);
+        }
+        if (summary.length() > SummaryMaxLenK) break;
+    }
+
+    LOG_DEBUG << "SUMMAY:" << summary;
+
     return summary;
 }

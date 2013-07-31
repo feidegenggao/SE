@@ -35,7 +35,7 @@ class ForwardIndexIndex : public base::Singleton<ForwardIndexIndex>
 
         std::string GetForwardIndexString(unsigned int doc_id) const;
     public:
-        std::string GetSummary(unsigned int doc_id) const;
+        std::string GetSummary(const std::string &key_words, unsigned int doc_id) const;
 };
 
 #endif

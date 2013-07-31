@@ -56,7 +56,7 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
         string data_body;
         string url = DocIndex::GetInstance()->GetUrl(*it);
         string title = DocIndex::GetInstance()->GetTitle(*it); 
-        string summary = ForwardIndexIndex::GetInstance()->GetSummary(*it);
+        string summary = ForwardIndexIndex::GetInstance()->GetSummary(key_word, *it);
         data_body = title + PORTAL_SEARCH_DATA_SEPARATOR +
             url + PORTAL_SEARCH_DATA_SEPARATOR +
             summary + PORTAL_SEARCH_DATA_SEPARATOR;
