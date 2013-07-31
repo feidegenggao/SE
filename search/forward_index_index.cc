@@ -104,7 +104,7 @@ string ForwardIndexIndex::GetSummary(const string &key_words, unsigned int doc_i
     string remove_can_not_distinguish_word = RemoveNOChinese(key_words);
     vector<string> participled_str_vector = Participle(remove_can_not_distinguish_word);
 
-    const size_t SummaryMaxLenK = 60 * 3;
+    const size_t SummaryMaxLenK = 100 * 3;
     const size_t MaxSentenceLenK = 30 * 3;
     string summary;
     string temp_line;
@@ -131,7 +131,6 @@ string ForwardIndexIndex::GetSummary(const string &key_words, unsigned int doc_i
                 summary += temp_line;
                 rest_len_of_this_sentence -= temp_line.length();
             }
-            participled_str_vector.erase(find_result_itor);
         }
         if (summary.length() > SummaryMaxLenK) break;
     }
