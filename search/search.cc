@@ -80,6 +80,7 @@ void SendDataOfKeyWord(Socket &accept_socket, const std::string &key_word)
 static void GetDataGram(Socket &accept_socket, string &dst_str)
 {
     do{
+        LOG_DEBUG << "RUN";
         char read_buf[2] = {0};
         accept_socket.Read(read_buf, sizeof(read_buf) - 1);
         string temp(read_buf);
@@ -149,6 +150,7 @@ void StartSearch()
 
     while(true)
     {
+        LOG_DEBUG << "RUN";
         const int accept_fd = listen_socket.Accept();
         pthread_t thread_id;
         int create_thread_rt = pthread_create(&thread_id, NULL, 
