@@ -93,6 +93,9 @@ bool Url::IfFilter(const string &url)
     //We only craw uestc's html
     string dst_url_regex("^http://[^/]+\\.uestc.edu.cn(/.*|$)");
     //We will not download ANY files that like a.doc b.pdf and others not html file
-    string dst_url_file_format("^http://[^/]+/[^\\.]{1}.*");
-    return ( RegexMatch(url, dst_url_regex) and (!RegexMatch(url, dst_url_file_format)));
+    string dst_url_file_doc("^http://.*\\.doc");
+    string dst_url_file_pdf("^http://.*\\.pdf");
+    return ( RegexMatch(url, dst_url_regex) and 
+           (!RegexMatch(url, dst_url_file_doc)) and
+           (!RegexMatch(url, dst_url_file_pdf)) );
 }

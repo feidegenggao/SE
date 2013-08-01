@@ -27,7 +27,7 @@
 using namespace std;
 using namespace base;
 
-const int g_k_n_search_deepth = 2;
+const int g_k_n_search_deepth = 10;
 
 void GetSiteSeed(UrlSet &sites_seeds, const string &file_name);
 int visit_url(const Url &url, const UrlSet &visited_sites, UrlSet &unvisited_sites);

@@ -26,7 +26,8 @@ int main()
     {
         LOG_DEBUG << url_edu.Str() << " is Valid ";
     }
-    Url url_edu2("http://www.jwc.uestc.edu.cn/down/a.doc");
+
+    Url url_edu2("http://yinxing.uestc.edu.cn/index.php?p=category&category_id=23");
     if (url_edu2.IfValid())
     {
         LOG_DEBUG << url_edu2.Str() << " is Valid";
