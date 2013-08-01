@@ -45,6 +45,8 @@ namespace net
             SocketStatus Status() const { return sock_st_;}
             bool Connect(const SockAddr &server_addr);
             ssize_t Read(void *buf, size_t count);
+            //timeout's unit is milliseconds 
+            ssize_t Read(void *buf, size_t count, int timeout);
             ssize_t Write(const void *buf, size_t count);
 
         public:

@@ -21,6 +21,8 @@
 #include    <sys/socket.h>
 #include    <sys/types.h>
 
+#include    <sys/epoll.h>
+
 using namespace net;
 Socket::Socket():LISTEN_BACKLOG(0)
 {
@@ -111,6 +113,44 @@ ssize_t Socket::Read(void *buf, size_t count)
     //set timer to read
     ssize_t read_n = read(sockfd_, buf, count);
     return read_n;
+}
+
+ssize_t Socket::Read(void *buf, size_t count, int timeout)
+{
+    const int MAXEVENTS = 10;
+    struct epoll_event ev, events[MAXEVENTS];
+
+    int epollfd = epoll_create(MAXEVENTS);
+    assert(epollfd != -1);
+
+    ev.data.fd = sockfd_;
+    ev.events = EPOLLIN;
+
+    int epoll_ctl_result = epoll_ctl(epollfd, EPOLL_CTL_ADD, sockfd_, &ev);
+    assert(epoll_ctl_result != -1);
+
+    int nfds = epoll_wait(epollfd, events, MAXEVENTS, timeout);
+    assert(nfds != -1);
+
+    ssize_t read_n;
+    for (int i = 0; i < nfds; ++i)
+    {
+        read_n = read(sockfd_, buf, count);
+    }
+
+    epoll_ctl_result = epoll_ctl(epollfd, EPOLL_CTL_DEL, sockfd_, &ev);
+    assert(epoll_ctl_result != -1);
+
+    close(epollfd);
+
+    if (nfds == 0)
+    {
+        return -1;
+    }
+    else
+    {
+        return read_n;
+    }
 }
 
 ssize_t Socket::Write(const void *buf, size_t count)

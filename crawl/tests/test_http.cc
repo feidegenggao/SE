@@ -24,15 +24,15 @@ using namespace base;
 using namespace net;
 int main()
 {
-    Url dst_url("http://press.uestc.edu.cn/");
+    Url dst_url("http://www.pd.uestc.edu.cn/");
 
     string http_header;
     string html_data;
-    LOG_DEBUG << "Start GetPage:";
+    LOG_DEBUG << "Start GetPage:" << dst_url.Str();
     if (GetPage(dst_url, http_header, html_data))
     {
         LOG_DEBUG << "GetPage success, http_header:" << http_header
-            << "html_data'length:" << html_data;
+            << "html_data'length:" << html_data.length();
     }
     else
     {

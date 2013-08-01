@@ -69,7 +69,7 @@ bool GetPage(const Url &server_url, string &http_header, string &html_data)
         LOG_DEBUG << "before read";
         //FIXME:read and write set to block and add timer to interupt
         //the timeout operation
-        read_n = client_socket.Read(read_buf, sizeof(read_buf) - 1);
+        read_n = client_socket.Read(read_buf, sizeof(read_buf) - 1, 1000 * 5);
         LOG_DEBUG << "after read";
         if (read_n < 0) return false;
         read_buf[sizeof(read_buf) - 1] = '\0';
