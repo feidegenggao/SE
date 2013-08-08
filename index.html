@@ -8,15 +8,15 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Se by feidegenggao</title>
+    <title>Tiny search engine by feidegenggao</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>Se</h1>
-        <h2></h2>
+        <h1>Tiny search engine</h1>
+        <h2>TSE--搜索引擎原型简介</h2>
 
         <section id="downloads">
           <a href="https://github.com/feidegenggao/SE/zipball/master" class="btn">Download as .zip</a>
@@ -29,36 +29,64 @@
     <div class="container">
       <section id="main_content">
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="%E7%AE%80%E4%BB%8B" class="anchor" href="#%E7%AE%80%E4%BB%8B"><span class="octicon octicon-link"></span></a>简介</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>TSE是根据北大天网的实现原理，实现了一个搜索引擎的原型系统。</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>系统使用了基础类库包括在<a href="https://github.com/feidegenggao/lib">https://github.com/feidegenggao/lib</a>。</p>
+
+<p>编译TSE前需要修改se根目录下的path.mk文件中</p>
+
+<pre><code>PROJECT_ROOT_DIR=se项目根目录
+LIB_DIR=lib类库根目录
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>TSE由三部分组成：crawl，index_match，search</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="crawl" class="anchor" href="#crawl"><span class="octicon octicon-link"></span></a>crawl</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>抓取网页。网址的起始网址在sites.seeds文件中存放，我们成为种子网址，也就是从这个网址开始搜索。</p>
+
+<p>我们在实现过程中，考虑到了本阶段是原型系统所以抓取网页时仅仅抓去了*.uestc.edu.cn/*</p>
+
+<p>抓取网页的策略为广度优先，深度是一个定值比如搜索深度为10
+抓取网页的原始数据存放在doc_(搜索深度).raw</p>
+
+<p>说明：
+我们抓取网页的时候为了简化编码方面的处理，仅仅抓取了UTF-8编码的网页。</p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="index_match" class="anchor" href="#index_match"><span class="octicon octicon-link"></span></a>index_match</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>分析原始数据，输出文件为：</p>
+
+<p>文档索引（命名为doc.index）每一行的含义：文档ID 文档在raw文件的off_set 文档url的md5值</p>
+
+<p>正向索引（命名为forward.index)每一行的含义：文档ID 分词结果（以空格分开）
+正向索引的索引（命名为forward_index.index) 每一行的含义：文档ID 该文档内容在forward.index中的off_set</p>
+
+<p>倒排索引（命名为inverted.index)每一行的含义：关键词 出现该关键词的文档集合（以空格分开）</p>
+
+<p>说明：
+分词过程中，仅仅分析了中文，对于非中文字符（比如英文，数字以及英文标点符号）我们简单地进行了过滤处理。</p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="search" class="anchor" href="#search"><span class="octicon octicon-link"></span></a>search</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>最后一步是为用户提供搜索服务，呈现的界面是用php写的，猛击：<a href="https://github.com/feidegenggao/SEPortal">https://github.com/feidegenggao/SEPortal</a> 
+php把用户要搜索的关键词通过套接字发送给search，search把搜索结果返回给php页面并显示出来。下面简述一下搜索的过程</p>
+
+<p>首先，把用户的关键词进行分词，分成了集合key-words-match-set</p>
+
+<p>其次，遍历集合中的每一个词从倒排索引中找到对应的集合，从而我们可以得到文档ID集合的集合，对这些结合求交集得到一个文档ID结果集合</p>
+
+<p>最后，根据上一步中生成的索引文件生成每个文档ID对应的摘要，返回给php页面</p>
 
 <h3>
 <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>联系我：&lt; liuxiaofei333 at gmail dot com &gt;</p>
       </section>
     </div>
 
