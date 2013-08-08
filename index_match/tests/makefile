@@ -1,4 +1,4 @@
-PROJECT_ROOT=/root/lxf/se
+PROJECT_ROOT=../../
 BASE_DIR=$(PROJECT_ROOT)/base
 NET_DIR=$(PROJECT_ROOT)/net
 COMPLIE_OPTION= -g -Wall -Werror -I$(PROJECT_ROOT) 
